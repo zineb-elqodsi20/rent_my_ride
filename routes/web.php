@@ -38,14 +38,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    // Routes dashboard selon le rôle
-    Route::middleware(['auth'])->group(function () {
+    
         Route::get('dashboard', function () {
             $user = Auth::user();
             $component = $user->hasRole('admin') ? 'Admin/Dashboard' : 'User/Dashboard';
 
             return Inertia::render($component, compact('user'));
         })->name('dashboard');
-    });
+   
 });
