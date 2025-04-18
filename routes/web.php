@@ -1,7 +1,9 @@
 <?php
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ListUserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\CheckRoleAdmin;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,7 +34,7 @@ Route::post('login', [LoginController::class, 'login']);
 require __DIR__.'/auth.php';
 
 // Routes protégées (authentifiées)
-Route::middleware(['auth', 'verified'])->group(function () {
+    Route::middleware(['auth', 'verified'])->group(function () {
     // Gestion du profil (accessible à tous les utilisateurs authentifiés)
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -41,7 +43,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         $user = Auth::user();
         $component = $user->hasRole('admin') ? 'Admin/Dashboard' : 'User/Dashboard';
-
         return Inertia::render($component, compact('user'));
     })->name('dashboard');
+
+    Route::middleware([CheckRoleAdmin::class])->group(function () {
+        Route::get('dashboard/user',[ListUserController::class,'index']);
+    });     
+   
 });
