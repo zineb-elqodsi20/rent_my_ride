@@ -12,73 +12,74 @@ export default function AuthenticatedLayout({ header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav className="border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="flex h-16 justify-between">
-                        <div className="flex">
-                            <Link href="/" className="flex items-center">
-                                <ApplicationLogo className="h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+        <div className="min-h-screen bg-white">
+            {/* NAVBAR */}
+            <nav className="bg-white shadow-sm">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex justify-between h-16">
+                        {/* Logo + Rent My Ride */}
+                        <div className="flex items-center space-x-2">
+                            <Link href="/" className="flex items-center h-full">
+                                <img 
+                                    src="/images/logo.png" 
+                                    alt="Rent My Ride Logo" 
+                                    className="h-full py-2 object-contain" 
+                                />
+                                <span className="ml-2 text-xl font-bold text-indigo-600">
+                                    Rent My Ride
+                                </span>
                             </Link>
-                            <div className="hidden sm:flex sm:space-x-8 sm:ms-10">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
-                                </NavLink>
-
-                                {user?.isAdmin && (
-                                    <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                        Admin Dashboard
-                                    </NavLink>
-                                )}
-                            </div>
                         </div>
 
-                        <div className="hidden sm:ms-6 sm:flex sm:items-center">
-                            <Dropdown>
-                                <Dropdown.Trigger>
-                                    <button className="inline-flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400">
-                                        {user.prenom} {user.nom}
-                                    </button>
-                                </Dropdown.Trigger>
+                        {/* Navigation (center optionnel) */}
+                        <div className="hidden sm:flex sm:space-x-8 sm:ms-10">
+                            {/* Tu peux ajouter ici des liens */}
+                        </div>
 
-                                <Dropdown.Content>
-                                    <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
-                                    <Dropdown.Link href={route('logout')} method="post" as="button">
-                                        Log Out
-                                    </Dropdown.Link>
-                                </Dropdown.Content>
-                            </Dropdown>
+                        {/* Profil + Déconnexion (Desktop) */}
+                        <div className="hidden sm:ms-6 sm:flex sm:items-center space-x-2">
+                            <Link
+                                href={route('profile.edit')}
+                                className="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium"
+                            >
+                                Profil
+                            </Link>
+                            <Link
+                                method="post"
+                                href={route('logout')}
+                                as="button"
+                                className="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium"
+                            >
+                                Déconnexion
+                            </Link>
                         </div>
                     </div>
                 </div>
 
+                {/* Menu Responsive (Mobile) */}
                 <div className={`sm:hidden ${showingNavigationDropdown ? 'block' : 'hidden'}`}>
-                    <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                        Dashboard
+                    <ResponsiveNavLink href="/" active={route().current('dashboard')}>
+                        Rent My Ride
                     </ResponsiveNavLink>
 
-                    {user?.isAdmin && (
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            Admin Dashboard
-                        </ResponsiveNavLink>
-                    )}
-
-                    <div className="border-t border-gray-200 dark:border-gray-600 pb-1 pt-4">
-                        <div className="px-4 text-sm text-gray-500 dark:text-gray-300">
+                    <div className="border-t border-gray-200 pb-1 pt-4">
+                        <div className="px-4 text-sm text-gray-500">
                             {user.name} <br /> {user.email}
                         </div>
-                        <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
-                        <ResponsiveNavLink method="post" href={route('logout')} as="button">Log Out</ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('profile.edit')}>Profil</ResponsiveNavLink>
+                        <ResponsiveNavLink method="post" href={route('logout')} as="button">Déconnexion</ResponsiveNavLink>
                     </div>
                 </div>
             </nav>
 
+            {/* Header si nécessaire */}
             {header && (
-                <header className="bg-white shadow dark:bg-gray-800">
+                <header className="bg-white shadow">
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">{header}</div>
                 </header>
             )}
 
+            {/* Contenu de page */}
             <main>{children}</main>
         </div>
     );

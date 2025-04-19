@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ListUserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckRoleAdmin;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -47,7 +48,13 @@ require __DIR__.'/auth.php';
     })->name('dashboard');
 
     Route::middleware([CheckRoleAdmin::class])->group(function () {
-        Route::get('dashboard/user',[ListUserController::class,'index']);
+        Route::get('dashboard/user',[ListUserController::class,'index'])->name('dashboard.user');
+        Route::delete('/users/{id}', [ListUserController::class, 'destroy'])->name('users.destroy');
+        Route::get('/users/{id}/edit', [ListUserController::class, 'edit'])->name('users.edit');
+        Route::put('/users/{id}', [ListUserController::class, 'update'])->name('users.update');
+        Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+        Route::post('/users', [UserController::class, 'store'])->name('users.store');
+
     });     
    
 });
