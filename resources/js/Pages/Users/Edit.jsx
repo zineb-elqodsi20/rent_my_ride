@@ -1,80 +1,75 @@
-import React, { useState } from 'react';
-import { useForm } from '@inertiajs/react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { useState } from 'react';
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
-export default function Edit({ user }) {
-    const { data, setData, put, processing, errors } = useForm({
-        nom: user.nom,
-        prenom: user.prenom,
-        email: user.email,
-        adresse: user.adresse,
-        numero_telephone: user.numero_telephone,
-        ville: user.ville,
-    });
+export default function ListCars({ cars }) {
+  const handleEdit = (carId) => {
+    // Redirige vers la page de modification de la voiture
+    window.location.href = `/cars/${carId}/edit`; // Ajuste la route de modification si nécessaire
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        put(`/users/${user.id}`);
-    };
+  const handleDelete = (carId) => {
+    // Logique pour supprimer la voiture
+    console.log("Supprimer la voiture avec l'ID: ", carId);
+  };
 
-    return (
-        <AuthenticatedLayout>
-            <div className="h-screen flex items-center justify-center p-6">
-                <div className="space-y-4 max-w-md bg-white p-6 rounded shadow-lg w-full">
-                    <h1 className="text-2xl font-bold text-indigo-600 mb-4 text-center">Modifier utilisateur</h1>
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <input 
-                            type="text" 
-                            value={data.nom} 
-                            onChange={e => setData('nom', e.target.value)} 
-                            placeholder="Nom" 
-                            className="w-full border p-2 rounded" 
-                        />
-                        <input 
-                            type="text" 
-                            value={data.prenom} 
-                            onChange={e => setData('prenom', e.target.value)} 
-                            placeholder="Prénom" 
-                            className="w-full border p-2 rounded" 
-                        />
-                        <input 
-                            type="email" 
-                            value={data.email} 
-                            onChange={e => setData('email', e.target.value)} 
-                            placeholder="Email" 
-                            className="w-full border p-2 rounded" 
-                        />
-                        <input 
-                            type="text" 
-                            value={data.adresse} 
-                            onChange={e => setData('adresse', e.target.value)} 
-                            placeholder="Adresse" 
-                            className="w-full border p-2 rounded" 
-                        />
-                        <input 
-                            type="text" 
-                            value={data.numero_telephone} 
-                            onChange={e => setData('numero_telephone', e.target.value)} 
-                            placeholder="Téléphone" 
-                            className="w-full border p-2 rounded" 
-                        />
-                        <input 
-                            type="text" 
-                            value={data.ville} 
-                            onChange={e => setData('ville', e.target.value)} 
-                            placeholder="Ville" 
-                            className="w-full border p-2 rounded" 
-                        />
-                        <button 
-                            type="submit" 
-                            disabled={processing} 
-                            className="bg-indigo-600 text-white px-4 py-2 rounded w-full"
-                        >
-                            Sauvegarder
-                        </button>
-                    </form>
-                </div>
+  return (
+    <AuthenticatedLayout>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {cars.map(car => (
+          <div key={car.id} className="max-w-sm rounded overflow-hidden shadow-lg bg-white hover:bg-indigo-600 transition duration-300 ease-in-out transform hover:scale-105">
+            {/* Image de la voiture */}
+            {car.photo ? (
+              <img className="w-full h-48 object-cover" src={car.photo} alt={car.nom} />
+            ) : (
+              <div className="w-full h-48 bg-gray-200 flex items-center justify-center text-white text-xl">
+                Pas d'image disponible
+              </div>
+            )}
+
+            <div className="px-6 py-4">
+              {/* Nom de la voiture */}
+              <div className="font-bold text-xl mb-2 text-gray-800 hover:text-white">{car.nom}</div>
+              {/* Marque de la voiture */}
+              <p className="text-gray-700 text-base">
+                Marque: {car.marque}
+              </p>
+
+              {/* Description de la voiture */}
+              {car.description && (
+                <p className="text-gray-700 text-base mt-2">
+                  Description: {car.description}
+                </p>
+              )}
+
+              {/* Prix par jour */}
+              <p className="text-gray-700 text-base mt-2">
+                Prix par jour: {car.prix_par_jour} €
+              </p>
+
+              {/* Disponibilité */}
+              <p className={`text-sm mt-2 ${car.disponibilite ? 'text-green-500' : 'text-red-500'}`}>
+                {car.disponibilite ? 'Disponible' : 'Indisponible'}
+              </p>
+
+              {/* Boutons Modifier et Supprimer */}
+              <div className="mt-4 flex justify-between">
+                <button
+                  onClick={() => handleEdit(car.id)}
+                  className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded transition duration-200"
+                >
+                  Modifier
+                </button>
+                <button
+                  onClick={() => handleDelete(car.id)}
+                  className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded transition duration-200"
+                >
+                  Supprimer
+                </button>
+              </div>
             </div>
-        </AuthenticatedLayout>
-    );
+          </div>
+        ))}
+      </div>
+    </AuthenticatedLayout>
+  );
 }

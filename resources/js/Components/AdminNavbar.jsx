@@ -27,7 +27,7 @@ export default function AdminNavbar() {
                             Utilisateurs
                         </Link>
                         <Link 
-                            href="#"
+                            href={route('List.cars')}
                             className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600"
                         >
                             Voitures

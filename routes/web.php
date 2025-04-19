@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\ListUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -8,6 +9,7 @@ use App\Http\Middleware\CheckRoleAdmin;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
 
 // Routes publiques
 Route::get('/', function () {
@@ -54,7 +56,10 @@ require __DIR__.'/auth.php';
         Route::put('/users/{id}', [ListUserController::class, 'update'])->name('users.update');
         Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
         Route::post('/users', [UserController::class, 'store'])->name('users.store');
-
+        Route::get('list/cars',[CarController::class,'index'])->name('List.cars');
+        Route::get('/cars/create', [CarController::class, 'create'])->name('car.create');
+        Route::post('/cars', [CarController::class, 'store'])->name('cars.store');
+        Route::delete('/cars/{id}', [CarController::class, 'destroy'])->name('car.destroy');
     });     
    
 });
