@@ -1,6 +1,6 @@
 import React from 'react';
 import { router } from '@inertiajs/react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import AdminNavbar from '@/Components/AdminNavbar';
 
 export default function List({ users }) {
     const handleDelete = (id) => {
@@ -14,7 +14,8 @@ export default function List({ users }) {
     };
 
     return (
-        <AuthenticatedLayout>
+        <>
+        <AdminNavbar/>
 
                     <div className="p-6">
                         <h1 className="text-2xl font-bold text-indigo-600 mb-6">Liste des utilisateurs</h1>
@@ -75,6 +76,6 @@ export default function List({ users }) {
                 </table>
             </div>
         </div>
-        </AuthenticatedLayout>
+        </>
     );
 }

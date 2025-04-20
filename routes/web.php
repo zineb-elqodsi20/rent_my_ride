@@ -60,6 +60,10 @@ require __DIR__.'/auth.php';
         Route::get('/cars/create', [CarController::class, 'create'])->name('car.create');
         Route::post('/cars', [CarController::class, 'store'])->name('cars.store');
         Route::delete('/cars/{id}', [CarController::class, 'destroy'])->name('car.destroy');
+        Route::get('/cars/{id}/edit', [CarController::class, 'edit'])->name('car.edit');
+        Route::post('/cars/{id}', [CarController::class, 'update'])->name('car.update');
+
+
     });     
    
 });
