@@ -26,6 +26,18 @@ export default function UserNavbar() {
                             Accueil
                         </Link>
                         <Link 
+                            href={route('List.carsuser')}
+                            className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600"
+                        >
+                            Voitures
+                        </Link>
+                        <Link 
+                            href="/reservations"
+                            className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600"
+                        >
+                            Mes Réservations
+                        </Link>
+                        <Link 
                             href="/about"
                             className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600"
                         >
@@ -37,18 +49,8 @@ export default function UserNavbar() {
                         >
                             Contact
                         </Link>
-                        <Link 
-                            href={route('List.cars')}
-                            className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600"
-                        >
-                            Voitures
-                        </Link>
-                        <Link 
-                            href="/reservations"
-                            className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600"
-                        >
-                            Mes Réservations
-                        </Link>
+                        
+                       
                     </div>
                     <div className="flex items-center space-x-4">
                         <Link

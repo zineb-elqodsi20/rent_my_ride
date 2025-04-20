@@ -39,7 +39,7 @@ class CarController extends Controller
     
         Car::create($validated);
     
-        return redirect()->route('List.cars')->with('success', 'Voiture ajoutée avec succès.');
+        return redirect()->route('List.carsadmin')->with('success', 'Voiture ajoutée avec succès.');
     }
     public function destroy($id)
     {
@@ -51,7 +51,7 @@ class CarController extends Controller
 
         $car->delete();
 
-        return redirect()->route('List.cars')->with('success', 'Voiture supprimée avec succès.');
+        return redirect()->route('List.carsadmin')->with('success', 'Voiture supprimée avec succès.');
     }
    
     public function edit($id)
@@ -87,7 +87,7 @@ class CarController extends Controller
 
     $car->update($validated);
 
-    return redirect()->route('List.cars')->with('success', 'Voiture modifiée avec succès.');
+    return redirect()->route('List.carsadmin')->with('success', 'Voiture modifiée avec succès.');
 }
 
 

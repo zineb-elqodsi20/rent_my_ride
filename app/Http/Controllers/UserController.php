@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -39,4 +40,12 @@ class UserController extends Controller
     
         return redirect()->route('dashboard.user')->with('success', 'Utilisateur ajouté avec succès.');
     } 
+    public function userlistcars()
+    {
+        
+        $cars = Car::all();
+        return Inertia::render('Users/UserListCars', [
+            'cars' => $cars
+        ]);
+    }
 }
