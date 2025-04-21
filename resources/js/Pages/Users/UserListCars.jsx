@@ -2,10 +2,6 @@ import { router } from '@inertiajs/react';
 import UserNavbar from '@/Components/UserNavbar'; 
 
 export default function UserListCars({ cars }) {
-  const handleReserve = (carId) => {
-    router.visit(`/cars/${carId}/reserve`);
-  };
-
   return (
     <>
       <UserNavbar />
@@ -49,7 +45,7 @@ export default function UserListCars({ cars }) {
                 </div>
 
                 <button
-                  onClick={() => handleReserve(car.id)}
+                  onClick={() => router.visit(`/cars/${car.id}/reserve`)}
                   className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-md"
                 >
                   Réserver

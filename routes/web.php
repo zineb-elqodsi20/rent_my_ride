@@ -29,21 +29,16 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return Inertia::render('Contact');
 })->name('contact');
-
-// Routes d'authentification (version personnalisée)
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 
-// On conserve le fichier auth.php pour les autres fonctionnalités (register, password reset, etc.)
 require __DIR__.'/auth.php';
 
-// Routes protégées (authentifiées)
+
     Route::middleware(['auth', 'verified'])->group(function () {
-    // Gestion du profil (accessible à tous les utilisateurs authentifiés)
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
     Route::get('dashboard', function () {
         $user = Auth::user();
         $component = $user->hasRole('admin') ? 'Admin/Dashboard' : 'User/Dashboard';
@@ -54,7 +49,7 @@ require __DIR__.'/auth.php';
         Route::get('dashboard/user',[ListUserController::class,'index'])->name('dashboard.user');
         Route::delete('/users/{id}', [ListUserController::class, 'destroy'])->name('users.destroy');
         Route::get('/users/{id}/edit', [ListUserController::class, 'edit'])->name('users.edit');
-        Route::put('/users/{id}', [ListUserController::class, 'update'])->name('users.update');
+        Route::post('/users/{id}', [ListUserController::class, 'update'])->name('users.update');
         Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
         Route::post('/users', [UserController::class, 'store'])->name('users.store');
         Route::get('list/cars/admin',[CarController::class,'index'])->name('List.carsadmin');

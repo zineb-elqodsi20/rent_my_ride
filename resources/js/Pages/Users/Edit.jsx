@@ -1,75 +1,140 @@
-import { useState } from 'react';
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import React, { useState, useEffect } from 'react';
+import { useForm } from '@inertiajs/react';
+import AdminNavbar from '@/Components/AdminNavbar';
 
-export default function ListCars({ cars }) {
-  const handleEdit = (carId) => {
-    // Redirige vers la page de modification de la voiture
-    window.location.href = `/cars/${carId}/edit`; // Ajuste la route de modification si nécessaire
+export default function EditUser({ user }) {
+  // Initialisation du formulaire avec les données de l'utilisateur
+  const { data, setData, post, errors } = useForm({
+    nom: user.nom || '',
+    prenom: user.prenom || '',
+    email: user.email || '',
+    adresse: user.adresse || '',
+    numero_telephone: user.numero_telephone || '',
+    ville: user.ville || '',
+  });
+
+  // Gère la mise à jour des champs du formulaire
+  const handleChange = (e) => {
+    setData(e.target.name, e.target.value);
   };
 
-  const handleDelete = (carId) => {
-    // Logique pour supprimer la voiture
-    console.log("Supprimer la voiture avec l'ID: ", carId);
+  // Gère l'envoi du formulaire
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    post(route('users.update', user.id), {
+      onSuccess: () => {
+        alert('Utilisateur mis à jour avec succès!');
+      },
+      onError: () => {
+        alert('Une erreur est survenue lors de la mise à jour!');
+      },
+    });
   };
 
   return (
-    <AuthenticatedLayout>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {cars.map(car => (
-          <div key={car.id} className="max-w-sm rounded overflow-hidden shadow-lg bg-white hover:bg-indigo-600 transition duration-300 ease-in-out transform hover:scale-105">
-            {/* Image de la voiture */}
-            {car.photo ? (
-              <img className="w-full h-48 object-cover" src={car.photo} alt={car.nom} />
-            ) : (
-              <div className="w-full h-48 bg-gray-200 flex items-center justify-center text-white text-xl">
-                Pas d'image disponible
-              </div>
-            )}
-
-            <div className="px-6 py-4">
-              {/* Nom de la voiture */}
-              <div className="font-bold text-xl mb-2 text-gray-800 hover:text-white">{car.nom}</div>
-              {/* Marque de la voiture */}
-              <p className="text-gray-700 text-base">
-                Marque: {car.marque}
-              </p>
-
-              {/* Description de la voiture */}
-              {car.description && (
-                <p className="text-gray-700 text-base mt-2">
-                  Description: {car.description}
-                </p>
-              )}
-
-              {/* Prix par jour */}
-              <p className="text-gray-700 text-base mt-2">
-                Prix par jour: {car.prix_par_jour} €
-              </p>
-
-              {/* Disponibilité */}
-              <p className={`text-sm mt-2 ${car.disponibilite ? 'text-green-500' : 'text-red-500'}`}>
-                {car.disponibilite ? 'Disponible' : 'Indisponible'}
-              </p>
-
-              {/* Boutons Modifier et Supprimer */}
-              <div className="mt-4 flex justify-between">
-                <button
-                  onClick={() => handleEdit(car.id)}
-                  className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded transition duration-200"
-                >
-                  Modifier
-                </button>
-                <button
-                  onClick={() => handleDelete(car.id)}
-                  className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded transition duration-200"
-                >
-                  Supprimer
-                </button>
-              </div>
-            </div>
+    <>
+      <AdminNavbar />
+      <div className="p-6">
+        <h1 className="text-2xl font-bold text-indigo-600 mb-6">Modifier l'utilisateur</h1>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Nom */}
+          <div>
+            <label className="block text-gray-700" htmlFor="nom">Nom</label>
+            <input
+              type="text"
+              id="nom"
+              name="nom"
+              value={data.nom}
+              onChange={handleChange}
+              className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md"
+              required
+            />
+            {errors.nom && <p className="text-red-600 text-sm">{errors.nom}</p>}
           </div>
-        ))}
+
+          {/* Prénom */}
+          <div>
+            <label className="block text-gray-700" htmlFor="prenom">Prénom</label>
+            <input
+              type="text"
+              id="prenom"
+              name="prenom"
+              value={data.prenom}
+              onChange={handleChange}
+              className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md"
+              required
+            />
+            {errors.prenom && <p className="text-red-600 text-sm">{errors.prenom}</p>}
+          </div>
+
+          {/* Email */}
+          <div>
+            <label className="block text-gray-700" htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={data.email}
+              onChange={handleChange}
+              className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md"
+              required
+            />
+            {errors.email && <p className="text-red-600 text-sm">{errors.email}</p>}
+          </div>
+
+          {/* Adresse */}
+          <div>
+            <label className="block text-gray-700" htmlFor="adresse">Adresse</label>
+            <input
+              type="text"
+              id="adresse"
+              name="adresse"
+              value={data.adresse}
+              onChange={handleChange}
+              className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md"
+              required
+            />
+            {errors.adresse && <p className="text-red-600 text-sm">{errors.adresse}</p>}
+          </div>
+
+          {/* Numéro de téléphone */}
+          <div>
+            <label className="block text-gray-700" htmlFor="numero_telephone">Téléphone</label>
+            <input
+              type="text"
+              id="numero_telephone"
+              name="numero_telephone"
+              value={data.numero_telephone}
+              onChange={handleChange}
+              className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md"
+              required
+            />
+            {errors.numero_telephone && <p className="text-red-600 text-sm">{errors.numero_telephone}</p>}
+          </div>
+
+          {/* Ville */}
+          <div>
+            <label className="block text-gray-700" htmlFor="ville">Ville</label>
+            <input
+              type="text"
+              id="ville"
+              name="ville"
+              value={data.ville}
+              onChange={handleChange}
+              className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md"
+              required
+            />
+            {errors.ville && <p className="text-red-600 text-sm">{errors.ville}</p>}
+          </div>
+
+          {/* Bouton de soumission */}
+          <div>
+            <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md w-full">
+              Enregistrer les modifications
+            </button>
+          </div>
+        </form>
       </div>
-    </AuthenticatedLayout>
+    </>
   );
 }
