@@ -1,21 +1,22 @@
 <?php
 
-
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class Reservation extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'user_id',
         'car_id',
-        'date_debut',
-        'date_fin',
-        'prix_total',
-        'statut',
-        'payment_id',
-        'payment_status'
+        'start_date',
+        'end_date',
+        'total_price',
+        'status',
     ];
 
     public function user()
@@ -26,11 +27,5 @@ class Reservation extends Model
     public function car()
     {
         return $this->belongsTo(Car::class);
-    }
-    public static function calculateTotalPrice($car_id, $date_debut, $date_fin)
-    {
-        $car = Car::findOrFail($car_id);
-        $days = (strtotime($date_fin) - strtotime($date_debut)) / (60 * 60 * 24);
-        return $car->prix_par_jour * $days;
     }
 }

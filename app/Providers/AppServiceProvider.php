@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\Reservation;
-use App\Observers\ReservationObserver;
+ 
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
@@ -32,6 +32,6 @@ class AppServiceProvider extends ServiceProvider
                 return null;
             }
         ]);
-        Reservation::observe(ReservationObserver::class);
+       
     }
 }

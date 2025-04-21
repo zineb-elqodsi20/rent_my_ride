@@ -5,6 +5,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ListUserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckRoleAdmin;
 use Illuminate\Foundation\Application;
@@ -58,8 +59,26 @@ require __DIR__.'/auth.php';
         Route::delete('/cars/{id}', [CarController::class, 'destroy'])->name('car.destroy');
         Route::get('/cars/{id}/edit', [CarController::class, 'edit'])->name('car.edit');
         Route::post('/cars/{id}', [CarController::class, 'update'])->name('car.update');
-    });     
+    });   
+  // Afficher le formulaire de réservation pour une voiture
+        Route::get('/cars/{car_id}/reserve', [ReservationController::class, 'create'])->name('reservations.create');
+            
+        // Enregistrer une nouvelle réservation
+        Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
+        
+        // Afficher les détails d'une réservation
+        Route::get('/reservations/{reservation}', [ReservationController::class, 'show'])->name('reservations.show');
+        
+        // Confirmer une réservation via email
+        Route::get('/reservations/{id}/confirm', [ReservationController::class, 'confirm'])->name('reservations.confirm');
+        
+        // Annuler une réservation (admin uniquement, vérifié dans le contrôleur)
+        Route::post('/reservations/{reservation}/cancel', [ReservationController::class, 'cancel'])->name('reservations.cancel');
+        
+        // Télécharger le reçu PDF
+        Route::get('/reservations/{reservation}/download', [ReservationController::class, 'downloadPdf'])->name('reservations.downloadPdf');
          Route::get('list/cars/user',[UserController::class,'userlistcars'])->name('List.carsuser');
-   
+         
 });
          Route::get('list/cars',[DashboardController::class,'listcars'])->name('List.cars');
+         
