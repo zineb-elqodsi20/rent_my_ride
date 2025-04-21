@@ -27,31 +27,31 @@ class ReservationController extends Controller
             'car_id' => 'required|exists:cars,id',
             'start_date' => 'required|date|after_or_equal:today',
             'end_date' => 'required|date|after:start_date',
+            'email' => 'required|email',
         ]);
-
-        // Calculer le prix total via la procédure stockée
-        $result = DB::select('CALL CalculateTotalPrice(?, ?, ?, @total_price)', [
-            $validated['car_id'],
-            $validated['start_date'],
-            $validated['end_date'],
-        ]);
-        $total_price = DB::select('SELECT @total_price as total_price')[0]->total_price;
-
-        // Créer la réservation
+    
+        $car = Car::findOrFail($validated['car_id']);
+        $days = now()->parse($validated['start_date'])->diffInDays(now()->parse($validated['end_date'])) + 1;
+        $total_price = $days * $car->prix_par_jour;
+    
         $reservation = Reservation::create([
             'user_id' => auth()->id(),
-            'car_id' => $validated['car_id'],
+            'car_id' => $car->id,
             'start_date' => $validated['start_date'],
             'end_date' => $validated['end_date'],
             'total_price' => $total_price,
             'status' => 'pending',
         ]);
 
-        // Envoyer l'email de confirmation
-        Mail::to(auth()->user()->email)->send(new ReservationConfirmation($reservation));
-
-        return redirect()->route('reservations.show', $reservation->id);
+        $reservation->load(['car' => function($query) {
+            $query->select('id', 'nom', 'prix_par_jour');
+        }]);
+    
+        Mail::to($validated['email'])->send(new ReservationConfirmation($reservation));
+    
+        return redirect()->route('dashboard')->with('success', 'Votre réservation a été confirmée et le reçu a été envoyé à votre email.');
     }
+    
 
     public function show(Reservation $reservation)
     {

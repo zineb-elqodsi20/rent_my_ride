@@ -20,7 +20,13 @@ class ReservationConfirmation extends Mailable
 
     public function build()
     {
-        return $this->subject('Confirmez votre réservation')
-            ->view('emails.reservation_confirmation');
+        return $this->subject('Confirmation de votre réservation de voiture')
+            ->view('emails.reservation_confirmation')
+            ->with([
+                'reservation' => $this->reservation,
+                'car' => $this->reservation->car,
+                'user' => $this->reservation->user,
+            ]);
     }
+    
 }
