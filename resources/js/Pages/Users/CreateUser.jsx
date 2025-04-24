@@ -21,7 +21,7 @@ export default function Create() {
 
     return (
         <AuthenticatedLayout>
-            <div className="max-w-2xl mx-auto mt-10 bg-white shadow-md rounded-lg p-6">
+             <div className="max-w-2xl mx-auto mt-10 bg-white shadow-md rounded-lg p-6">
                 <h2 className="text-2xl font-bold mb-6 text-indigo-600">Ajouter un utilisateur</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
 
