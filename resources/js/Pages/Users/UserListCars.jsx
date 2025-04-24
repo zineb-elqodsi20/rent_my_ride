@@ -44,9 +44,15 @@ export default function UserListCars({ cars }) {
                   <span className="text-gray-500 text-xs">/ jour</span>
                 </div>
 
-                <button
-                  onClick={() => router.visit(`/cars/${car.id}/reserve`)}
-                  className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-md"
+                {/* ✅ BOUTON RÉSERVER DÉSACTIVÉ SI INDISPONIBLE */}
+                <button 
+                  onClick={() => car.disponibilite && router.visit(`/cars/${car.id}/reserve`)}
+                  disabled={!car.disponibilite}
+                  className={`px-4 py-2 text-sm font-medium rounded-lg shadow-md transition-colors ${
+                    car.disponibilite
+                      ? 'bg-blue-600 text-white hover:bg-blue-700'
+                      : 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                  }`}
                 >
                   Réserver
                 </button>

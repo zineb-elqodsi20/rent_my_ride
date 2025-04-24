@@ -9,6 +9,7 @@ use App\Http\Controllers\ListUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserReservationController;
 use App\Http\Middleware\CheckRoleAdmin;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -82,8 +83,11 @@ require __DIR__.'/auth.php';
         
         // Télécharger le reçu PDF
         Route::get('/reservations/{reservation}/download', [ReservationController::class, 'downloadPdf'])->name('reservations.downloadPdf');
-         Route::get('list/cars/user',[UserController::class,'userlistcars'])->name('List.carsuser');
-         
+        Route::get('list/cars/user',[UserController::class,'userlistcars'])->name('List.carsuser');
+        Route::get('/mes-reservations', [UserReservationController::class, 'index'])->name('user.reservations');
+        Route::get('/mes-reservations/{reservation}/edit', [UserReservationController::class, 'edit'])->name('user.reservations.edit');
+        Route::put('/mes-reservations/{reservation}', [UserReservationController::class, 'update'])->name('user.reservations.update');
+        Route::delete('/mes-reservations/{reservation}', [UserReservationController::class, 'destroy'])->name('user.reservations.destroy');
 });
          Route::get('list/cars',[DashboardController::class,'listcars'])->name('List.cars');
          
