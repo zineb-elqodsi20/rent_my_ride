@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\AdminReservationController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CarController;
@@ -58,7 +60,11 @@ require __DIR__.'/auth.php';
         Route::delete('/cars/{id}', [CarController::class, 'destroy'])->name('car.destroy');
         Route::get('/cars/{id}/edit', [CarController::class, 'edit'])->name('car.edit');
         Route::post('/cars/{id}', [CarController::class, 'update'])->name('car.update');
-    });   
+        Route::get('/admin/reservations', [AdminReservationController::class, 'index'])->name('admin.reservations');
+        Route::delete('/admin/reservations/{reservation}', [AdminReservationController::class, 'destroy'])->name('admin.reservations.destroy');
+        Route::get('/admin/reservations/{reservation}/edit', [AdminReservationController::class, 'edit'])->name('admin.reservations.edit');
+        Route::put('/admin/reservations/{reservation}', [AdminReservationController::class, 'update'])->name('admin.reservations.update');
+            });   
   // Afficher le formulaire de réservation pour une voiture
         Route::get('/cars/{car_id}/reserve', [ReservationController::class, 'create'])->name('reservations.create');
             

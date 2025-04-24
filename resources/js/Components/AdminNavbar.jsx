@@ -33,7 +33,7 @@ export default function AdminNavbar() {
                             Voitures
                         </Link>
                         <Link 
-                            href="#" 
+                            href={route("admin.reservations" )}
                             className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600"
                         >
                             Réservations
