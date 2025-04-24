@@ -29,16 +29,21 @@ const Create = ({ car, reservation }) => {
             onSuccess: () => {
                 setShowEmailConfirmation(false);
                 setShowSuccess(true);
-                // Redirect to dashboard after 2 seconds
                 setTimeout(() => {
                     router.visit(route('dashboard'));
                 }, 2000);
             },
-            onError: (error) => {
-                console.error('Error:', error);
+            onError: (errors) => {
+                if (errors.car_unavailable) {
+                    alert(errors.car_unavailable);
+                    setShowModal(false); // Fermer le modal si voiture indisponible
+                } else {
+                    console.error('Erreur inconnue :', errors);
+                }
             },
         });
     };
+    
 
     return (
         <div className="max-w-md mx-auto mt-10">
