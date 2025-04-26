@@ -68,7 +68,8 @@ require __DIR__.'/auth.php';
         Route::put('/admin/reservations/{reservation}', [AdminReservationController::class, 'update'])->name('admin.reservations.update');
         Route::get('/dashboardAdmin', [DashboardAdminController::class,'index'])
     ->name('Admin.dashboardAdmin');
-        
+    Route::get('/admin/stats', [DashboardAdminController::class, 'fetchStats']);
+
             });   
   // Afficher le formulaire de réservation pour une voiture
         Route::get('/cars/{car_id}/reserve', [ReservationController::class, 'create'])->name('reservations.create');

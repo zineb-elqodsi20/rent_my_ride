@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { router } from '@inertiajs/react';
+import axios from 'axios';
 
-const DashboardAdmin = ({ stats: initialStats = {} }) => {
+const DashboardAdmin = () => {
     const [stats, setStats] = useState({
         reservationsToday: 0,
         reservationsChange: 0,
@@ -12,32 +12,44 @@ const DashboardAdmin = ({ stats: initialStats = {} }) => {
         totalRevenue: 0,
         currentMonthRevenue: 0,
         revenueChange: 0,
-        reservationsByMonth: Array.from({length: 12}, (_, i) => 0),
-        ...initialStats
+        reservationsByMonth: Array.from({ length: 12 }, () => 0),
     });
 
-    // Rafraîchissement automatique
+    const [loading, setLoading] = useState(true);
+
+    const fetchStats = async () => {
+        try {
+            const response = await axios.get('/admin/stats');
+            setStats(response.data);
+            setLoading(false);
+        } catch (error) {
+            console.error('Erreur de chargement des stats:', error);
+        }
+    };
+
     useEffect(() => {
+        fetchStats();
+
         const interval = setInterval(() => {
-            router.reload({ only: ['stats'] });
-        }, 30000); // 30 secondes
-        
+            fetchStats();
+        }, 30000); 
+
         return () => clearInterval(interval);
     }, []);
-
-    // Mise à jour quand les props changent
-    useEffect(() => {
-        setStats(prev => ({
-            ...prev,
-            ...initialStats
-        }));
-    }, [initialStats]);
 
     const getMonthName = (monthNumber) => {
         const date = new Date();
         date.setMonth(monthNumber - 1);
         return date.toLocaleString('fr-FR', { month: 'short' });
     };
+
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <p className="text-gray-500">Chargement du tableau de bord...</p>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-gray-50 p-6">
