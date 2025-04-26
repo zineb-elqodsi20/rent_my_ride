@@ -14,5 +14,9 @@ class Car extends Model
         'prix_par_jour', 
         'disponibilite'
     ];
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 
 }

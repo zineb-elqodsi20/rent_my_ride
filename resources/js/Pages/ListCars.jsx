@@ -1,6 +1,7 @@
 import { router } from '@inertiajs/react'; 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Navbar from '@/Components/Navbar';
+import Footer from '@/Components/Footer';
 
 export default function UserListCars({ cars }) {
   const handleReserve = (carId) => {
@@ -11,7 +12,7 @@ export default function UserListCars({ cars }) {
     <>
     <Navbar/>
     
-      <h1 className="text-2xl font-bold text-indigo-600 mb-6 text-center">Nos Voitures Disponibles</h1>
+
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-6">
         {cars.map(car => (
@@ -61,7 +62,7 @@ export default function UserListCars({ cars }) {
           </div>
         ))}
       </div>
-     
+      <Footer/>
     </>
   );
 }
