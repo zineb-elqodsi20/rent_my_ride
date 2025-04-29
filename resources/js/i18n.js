@@ -14,7 +14,32 @@ const resources = {
       "List.cars": "Voitures",
       aboutMenu: "À propos",
       contact: "Contact",
-
+      profile: "Profil",
+      logout: "Déconnexion",
+      modifyReserv:{
+        "reservation": {
+          "title": "Mes Réservations",
+          "subtitle": "Gérez l'ensemble de vos locations en cours et à venir",
+          "confirm_delete": "Êtes-vous sûr de vouloir supprimer cette réservation ?",
+          "no_reservations": "Aucune réservation trouvée",
+          "table": {
+            "car": "Voiture",
+            "start": "Début",
+            "end": "Fin",
+            "status": "Statut",
+            "actions": "Actions"
+          },
+          "status": {
+            "confirmée": "Confirmée",
+            "en attente": "En attente",
+            "annulée": "Annulée"
+          }
+        },
+        "buttons": {
+          "edit": "Modifier",
+          "delete": "Supprimer"
+        }
+      },      
       // Page d'accueil - Hero section
       drive_with_class: "Roulez avec classe.",
       rent_luxury_car: "Louez votre voiture de luxe en un clic.",
@@ -49,7 +74,7 @@ const resources = {
       return_date: "Date de retour",
       special_requests: "Demandes spéciales",
       book_vehicle: "Réserver ce véhicule",
-
+      reservations: "Mes Réservations",
       // Authentification
       remember_me: "Se souvenir de moi",
       forgot_password: "Mot de passe oublié?",
@@ -60,7 +85,17 @@ const resources = {
       success: "Succès!",
       error: "Erreur!",
       loading: "Chargement...",
-
+      dashUser:{
+        welcome_back: "Bon retour",
+        personal_space: "Votre espace personnel",
+        manage_reservations_and_explore: "Gérez facilement vos réservations et explorez notre collection de véhicules.",
+        quick_access: "Accès rapide",
+        view_available_vehicles: "Voir les véhicules disponibles",
+        my_reservations: "Mes réservations",
+        your_profile: "Votre profil",
+        edit_info: "Modifier mes informations",
+        change_password: "Changer mon mot de passe"
+      },     
       // Section About
       about: {
         title: "À propos de Rent My Ride",
@@ -138,6 +173,37 @@ const resources = {
       "List.cars": "Cars",
       aboutMenu: "About Us",
       contact: "Contact",
+      reservations: "My Reservations",
+      profile: "Profile",
+      logout: "Logout",
+      
+      modifyReserv: {
+  "reservation": {
+    "title": "My Reservations",
+    "subtitle": "Manage all your current and upcoming rentals",
+    "confirm_delete": "Are you sure you want to delete this reservation?",
+    "no_reservations": "No reservations found",
+    "table": {
+      "car": "Car",
+      "start": "Start",
+      "end": "End",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "status": {
+      "confirmée": "Confirmed",
+      "en attente": "Pending",
+      "annulée": "Cancelled"
+    }
+  },
+  "buttons": {
+    "edit": "Edit",
+    "delete": "Delete"
+  }
+},
+      
+
+
 
       // Homepage - Hero section
       drive_with_class: "Drive with class.",
@@ -184,6 +250,18 @@ const resources = {
       success: "Success!",
       error: "Error!",
       loading: "Loading...",
+      dashUser:{
+        welcome_back: "Welcome back",
+        personal_space: "Your personal space",
+        manage_reservations_and_explore: "Easily manage your bookings and explore our vehicle collection.",
+        quick_access: "Quick access",
+        view_available_vehicles: "View available vehicles",
+        my_reservations: "My bookings",
+        your_profile: "Your profile",
+        edit_info: "Edit my info",
+        change_password: "Change my password"
+      },
+      
 
       // Section About
       about: {
@@ -262,6 +340,36 @@ const resources = {
       "List.cars": "Coches",
       aboutMenu: "Sobre nosotros",
       contact: "Contacto",
+      reservations: "Mis Reservas",
+      profile: "Perfil",
+        logout: "Cerrar sesión",
+
+        modifyReserv: {
+  "reservation": {
+    "title": "Mis Reservas",
+    "subtitle": "Gestiona todas tus reservas actuales y futuras",
+    "confirm_delete": "¿Estás seguro de que deseas eliminar esta reserva?",
+    "no_reservations": "No se encontraron reservas",
+    "table": {
+      "car": "Coche",
+      "start": "Inicio",
+      "end": "Fin",
+      "status": "Estado",
+      "actions": "Acciones"
+    },
+    "status": {
+      "confirmée": "Confirmada",
+      "en attente": "Pendiente",
+      "annulée": "Cancelada"
+    }
+  },
+  "buttons": {
+    "edit": "Editar",
+    "delete": "Eliminar"
+  }
+},
+
+
 
       // Homepage - Hero section
       drive_with_class: "Conduce con clase.",
@@ -308,7 +416,17 @@ const resources = {
       success: "¡Éxito!",
       error: "¡Error!",
       loading: "Cargando...",
-
+      dashUser:{
+        welcome_back: "Bienvenido de nuevo",
+        personal_space: "Tu espacio personal",
+        manage_reservations_and_explore: "Gestiona fácilmente tus reservas y explora nuestra colección de vehículos.",
+        quick_access: "Acceso rápido",
+        view_available_vehicles: "Ver vehículos disponibles",
+        my_reservations: "Mis reservas",
+        your_profile: "Tu perfil",
+        edit_info: "Editar mi información",
+        change_password: "Cambiar mi contraseña"
+      },      
       // Section About
       about: {
         title: "Sobre Rent My Ride",
@@ -349,6 +467,16 @@ const resources = {
       starting_from: "Desde",
       per_day: "día",
       reserve: "Reservar",
+
+     profiledel: {"deleteAccount": {
+    "title": "Eliminar cuenta",
+    "description": "Una vez que se elimine su cuenta, todos sus recursos y datos serán eliminados permanentemente. Antes de eliminar su cuenta, descargue cualquier dato o información que desee conservar.",
+    "confirm": "¿Está seguro de que desea eliminar su cuenta?",
+    "password": "Contraseña",
+    "cancel": "Cancelar",
+    "delete": "Eliminar cuenta"
+  }},
+      
 
       // Traducciones para la página de Contacto
       contact_subtitle: "Estamos aquí para responder a todas tus preguntas sobre nuestros vehículos de lujo.",

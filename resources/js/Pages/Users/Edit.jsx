@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useForm } from '@inertiajs/react';
 import AdminNavbar from '@/Components/AdminNavbar';
+import { motion } from 'framer-motion';
 
 export default function EditUser({ user }) {
-  // Initialisation du formulaire avec les données de l'utilisateur
-  const { data, setData, post, errors } = useForm({
+  const { data, setData, post, errors, processing } = useForm({
     nom: user.nom || '',
     prenom: user.prenom || '',
     email: user.email || '',
@@ -13,128 +13,212 @@ export default function EditUser({ user }) {
     ville: user.ville || '',
   });
 
-  // Gère la mise à jour des champs du formulaire
   const handleChange = (e) => {
     setData(e.target.name, e.target.value);
   };
 
-  // Gère l'envoi du formulaire
   const handleSubmit = (e) => {
     e.preventDefault();
-    post(route('users.update', user.id), {
-      onSuccess: () => {
-        alert('Utilisateur mis à jour avec succès!');
-      },
-      onError: () => {
-        alert('Une erreur est survenue lors de la mise à jour!');
-      },
-    });
+    post(route('users.update', user.id));
+  };
+
+  // Animations
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
   };
 
   return (
     <>
       <AdminNavbar />
-      <div className="p-6">
-        <h1 className="text-2xl font-bold text-indigo-600 mb-6">Modifier l'utilisateur</h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Nom */}
-          <div>
-            <label className="block text-gray-700" htmlFor="nom">Nom</label>
-            <input
-              type="text"
-              id="nom"
-              name="nom"
-              value={data.nom}
-              onChange={handleChange}
-              className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md"
-              required
-            />
-            {errors.nom && <p className="text-red-600 text-sm">{errors.nom}</p>}
-          </div>
+      <motion.div 
+        initial="hidden"
+        animate="show"
+        variants={container}
+        className="min-h-screen bg-gradient-to-br from-[#f9d5b3] via-[#d1b7b5] to-[#9cb3c5] p-6"
+      >
+        <motion.div 
+          variants={item}
+          className="max-w-2xl mx-auto bg-white/80 backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden p-8"
+        >
+          <motion.h1 
+            variants={item}
+            className="text-3xl font-bold text-[#2c3e50] mb-8 text-center"
+          >
+            Modifier l'utilisateur
+          </motion.h1>
 
-          {/* Prénom */}
-          <div>
-            <label className="block text-gray-700" htmlFor="prenom">Prénom</label>
-            <input
-              type="text"
-              id="prenom"
-              name="prenom"
-              value={data.prenom}
-              onChange={handleChange}
-              className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md"
-              required
-            />
-            {errors.prenom && <p className="text-red-600 text-sm">{errors.prenom}</p>}
-          </div>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Nom */}
+            <motion.div variants={item}>
+              <label className="block text-[#2c3e50] font-medium mb-2" htmlFor="nom">
+                Nom
+              </label>
+              <motion.input
+                whileFocus={{ scale: 1.02 }}
+                type="text"
+                id="nom"
+                name="nom"
+                value={data.nom}
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-[#b7c7d6] rounded-lg focus:ring-2 focus:ring-[#9cb3c5] focus:border-transparent"
+                required
+              />
+              {errors.nom && (
+                <motion.p 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="mt-1 text-sm text-[#d1b7b5]"
+                >
+                  {errors.nom}
+                </motion.p>
+              )}
+            </motion.div>
 
-          {/* Email */}
-          <div>
-            <label className="block text-gray-700" htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={data.email}
-              onChange={handleChange}
-              className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md"
-              required
-            />
-            {errors.email && <p className="text-red-600 text-sm">{errors.email}</p>}
-          </div>
+            {/* Prénom */}
+            <motion.div variants={item}>
+              <label className="block text-[#2c3e50] font-medium mb-2" htmlFor="prenom">
+                Prénom
+              </label>
+              <motion.input
+                whileFocus={{ scale: 1.02 }}
+                type="text"
+                id="prenom"
+                name="prenom"
+                value={data.prenom}
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-[#b7c7d6] rounded-lg focus:ring-2 focus:ring-[#9cb3c5] focus:border-transparent"
+                required
+              />
+              {errors.prenom && (
+                <motion.p className="mt-1 text-sm text-[#d1b7b5]">
+                  {errors.prenom}
+                </motion.p>
+              )}
+            </motion.div>
 
-          {/* Adresse */}
-          <div>
-            <label className="block text-gray-700" htmlFor="adresse">Adresse</label>
-            <input
-              type="text"
-              id="adresse"
-              name="adresse"
-              value={data.adresse}
-              onChange={handleChange}
-              className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md"
-              required
-            />
-            {errors.adresse && <p className="text-red-600 text-sm">{errors.adresse}</p>}
-          </div>
+            {/* Email */}
+            <motion.div variants={item}>
+              <label className="block text-[#2c3e50] font-medium mb-2" htmlFor="email">
+                Email
+              </label>
+              <motion.input
+                whileFocus={{ scale: 1.02 }}
+                type="email"
+                id="email"
+                name="email"
+                value={data.email}
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-[#b7c7d6] rounded-lg focus:ring-2 focus:ring-[#9cb3c5] focus:border-transparent"
+                required
+              />
+              {errors.email && (
+                <motion.p className="mt-1 text-sm text-[#d1b7b5]">
+                  {errors.email}
+                </motion.p>
+              )}
+            </motion.div>
 
-          {/* Numéro de téléphone */}
-          <div>
-            <label className="block text-gray-700" htmlFor="numero_telephone">Téléphone</label>
-            <input
-              type="text"
-              id="numero_telephone"
-              name="numero_telephone"
-              value={data.numero_telephone}
-              onChange={handleChange}
-              className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md"
-              required
-            />
-            {errors.numero_telephone && <p className="text-red-600 text-sm">{errors.numero_telephone}</p>}
-          </div>
+            {/* Adresse */}
+            <motion.div variants={item}>
+              <label className="block text-[#2c3e50] font-medium mb-2" htmlFor="adresse">
+                Adresse
+              </label>
+              <motion.input
+                whileFocus={{ scale: 1.02 }}
+                type="text"
+                id="adresse"
+                name="adresse"
+                value={data.adresse}
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-[#b7c7d6] rounded-lg focus:ring-2 focus:ring-[#9cb3c5] focus:border-transparent"
+                required
+              />
+              {errors.adresse && (
+                <motion.p className="mt-1 text-sm text-[#d1b7b5]">
+                  {errors.adresse}
+                </motion.p>
+              )}
+            </motion.div>
 
-          {/* Ville */}
-          <div>
-            <label className="block text-gray-700" htmlFor="ville">Ville</label>
-            <input
-              type="text"
-              id="ville"
-              name="ville"
-              value={data.ville}
-              onChange={handleChange}
-              className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-md"
-              required
-            />
-            {errors.ville && <p className="text-red-600 text-sm">{errors.ville}</p>}
-          </div>
+            {/* Téléphone */}
+            <motion.div variants={item}>
+              <label className="block text-[#2c3e50] font-medium mb-2" htmlFor="numero_telephone">
+                Téléphone
+              </label>
+              <motion.input
+                whileFocus={{ scale: 1.02 }}
+                type="text"
+                id="numero_telephone"
+                name="numero_telephone"
+                value={data.numero_telephone}
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-[#b7c7d6] rounded-lg focus:ring-2 focus:ring-[#9cb3c5] focus:border-transparent"
+                required
+              />
+              {errors.numero_telephone && (
+                <motion.p className="mt-1 text-sm text-[#d1b7b5]">
+                  {errors.numero_telephone}
+                </motion.p>
+              )}
+            </motion.div>
 
-          {/* Bouton de soumission */}
-          <div>
-            <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md w-full">
-              Enregistrer les modifications
-            </button>
-          </div>
-        </form>
-      </div>
+            {/* Ville */}
+            <motion.div variants={item}>
+              <label className="block text-[#2c3e50] font-medium mb-2" htmlFor="ville">
+                Ville
+              </label>
+              <motion.input
+                whileFocus={{ scale: 1.02 }}
+                type="text"
+                id="ville"
+                name="ville"
+                value={data.ville}
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-[#b7c7d6] rounded-lg focus:ring-2 focus:ring-[#9cb3c5] focus:border-transparent"
+                required
+              />
+              {errors.ville && (
+                <motion.p className="mt-1 text-sm text-[#d1b7b5]">
+                  {errors.ville}
+                </motion.p>
+              )}
+            </motion.div>
+
+            {/* Bouton de soumission */}
+            <motion.div variants={item} className="pt-4">
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                disabled={processing}
+                className={`w-full py-3 px-6 rounded-lg font-semibold text-white shadow-lg transition-all ${
+                  processing ? 'bg-[#d1b7b5]' : 'bg-[#9cb3c5] hover:bg-[#b7c7d6]'
+                }`}
+              >
+                {processing ? 'Enregistrement...' : 'Enregistrer les modifications'}
+              </motion.button>
+            </motion.div>
+          </form>
+        </motion.div>
+      </motion.div>
     </>
   );
 }

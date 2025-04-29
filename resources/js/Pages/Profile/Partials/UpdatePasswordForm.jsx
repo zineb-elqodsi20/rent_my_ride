@@ -45,13 +45,13 @@ export default function UpdatePasswordForm({ className = '' }) {
     };
 
     return (
-        <section className={className}>
+        <section className={`${className} bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300`}>
             <header>
-                <h2 className="text-lg font-bold text-indigo-600">
+                <h2 className="text-lg font-bold animate-gradient-text bg-gradient-to-r from-[#f9d5b3] via-[#f0c1a0] via-[#d1b7b5] via-[#b7c7d6] to-[#9cb3c5] bg-clip-text text-transparent">
                     Modifier le mot de passe
                 </h2>
 
-                <p className="mt-1 text-sm text-indigo-600">
+                <p className="mt-1 text-sm text-[#9cb3c5] transition-colors duration-300 hover:text-[#f0c1a0]">
                     Utilisez un mot de passe fort et unique pour sécuriser votre compte.
                 </p>
             </header>
@@ -61,7 +61,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                     <InputLabel
                         htmlFor="current_password"
                         value="Mot de passe actuel"
-                        className="text-indigo-600"
+                        className="text-[#b7c7d6] transition-colors duration-300 hover:text-[#f0c1a0]"
                     />
 
                     <TextInput
@@ -72,13 +72,13 @@ export default function UpdatePasswordForm({ className = '' }) {
                             setData('current_password', e.target.value)
                         }
                         type="password"
-                        className="mt-1 block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-900 dark:border-gray-700 dark:text-white"
+                        className="mt-1 block w-full rounded-lg border-[#d1b7b5] focus:border-[#9cb3c5] focus:ring-[#9cb3c5] focus:ring-opacity-50 shadow-sm transition-all duration-300"
                         autoComplete="current-password"
                     />
 
                     <InputError
                         message={errors.current_password}
-                        className="mt-2 text-red-600"
+                        className="mt-2 text-[#f0c1a0]"
                     />
                 </div>
 
@@ -86,7 +86,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                     <InputLabel
                         htmlFor="password"
                         value="Nouveau mot de passe"
-                        className="text-indigo-600"
+                        className="text-[#b7c7d6] transition-colors duration-300 hover:text-[#f0c1a0]"
                     />
 
                     <TextInput
@@ -95,18 +95,21 @@ export default function UpdatePasswordForm({ className = '' }) {
                         value={data.password}
                         onChange={(e) => setData('password', e.target.value)}
                         type="password"
-                        className="mt-1 block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-900 dark:border-gray-700 dark:text-white"
+                        className="mt-1 block w-full rounded-lg border-[#d1b7b5] focus:border-[#9cb3c5] focus:ring-[#9cb3c5] focus:ring-opacity-50 shadow-sm transition-all duration-300"
                         autoComplete="new-password"
                     />
 
-                    <InputError message={errors.password} className="mt-2 text-red-600" />
+                    <InputError 
+                        message={errors.password} 
+                        className="mt-2 text-[#f0c1a0]" 
+                    />
                 </div>
 
                 <div>
                     <InputLabel
                         htmlFor="password_confirmation"
                         value="Confirmer le mot de passe"
-                        className="text-indigo-600"
+                        className="text-[#b7c7d6] transition-colors duration-300 hover:text-[#f0c1a0]"
                     />
 
                     <TextInput
@@ -116,29 +119,39 @@ export default function UpdatePasswordForm({ className = '' }) {
                             setData('password_confirmation', e.target.value)
                         }
                         type="password"
-                        className="mt-1 block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-900 dark:border-gray-700 dark:text-white"
+                        className="mt-1 block w-full rounded-lg border-[#d1b7b5] focus:border-[#9cb3c5] focus:ring-[#9cb3c5] focus:ring-opacity-50 shadow-sm transition-all duration-300"
                         autoComplete="new-password"
                     />
 
                     <InputError
                         message={errors.password_confirmation}
-                        className="mt-2 text-red-600"
+                        className="mt-2 text-[#f0c1a0]"
                     />
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>
-                        Sauvegarder
+                    <PrimaryButton 
+                        disabled={processing}
+                        className="relative overflow-hidden group bg-gradient-to-r from-[#b7c7d6] to-[#9cb3c5] hover:from-[#f9d5b3] hover:to-[#f0c1a0] transition-all duration-500 shadow-md hover:shadow-lg hover:shadow-[#f0c1a0]/30"
+                    >
+                        <span className="relative z-10">
+                            {processing ? 'En cours...' : 'Sauvegarder'}
+                        </span>
+                        <span className="absolute inset-0 bg-gradient-to-r from-[#f9d5b3] to-[#d1b7b5] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                     </PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
-                        enter="transition ease-in-out"
-                        enterFrom="opacity-0"
-                        leave="transition ease-in-out"
-                        leaveTo="opacity-0"
+                        enter="transition ease-in-out duration-500"
+                        enterFrom="opacity-0 translate-x-4"
+                        enterTo="opacity-100 translate-x-0"
+                        leave="transition ease-in-out duration-500"
+                        leaveFrom="opacity-100 translate-x-0"
+                        leaveTo="opacity-0 translate-x-4"
                     >
-                        <p className="text-sm text-indigo-600">Mot de passe mis à jour.</p>
+                        <p className="text-sm text-[#9cb3c5] animate-pulse">
+                            Mot de passe mis à jour.
+                        </p>
                     </Transition>
                 </div>
             </form>
