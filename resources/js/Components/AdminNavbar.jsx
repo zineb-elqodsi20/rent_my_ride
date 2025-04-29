@@ -18,6 +18,16 @@ export default function AdminNavbar() {
                     </div>
                     
                     <div className="hidden md:flex items-center space-x-8">
+                    <Link
+                            href={route("dashboard")}
+                            className="text-gray-700 px-3 py-2 text-sm font-medium relative
+                                       hover:text-gray-900 transition-colors duration-200
+                                       after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3
+                                       after:h-0.5 after:bg-gray-900 after:scale-x-0 after:origin-left
+                                       after:transition-transform after:duration-200 hover:after:scale-x-100"
+                        >
+                            Dashboard
+                        </Link>
                         <Link
                             href={route('dashboard.user')}
                             className="text-gray-700 px-3 py-2 text-sm font-medium relative
