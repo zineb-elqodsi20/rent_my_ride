@@ -58,6 +58,21 @@ const resources = {
         "saving": "En cours...",
         "updated": "Mot de passe mis à jour."
       },
+      registerpage:{
+        "title": "Créer un compte",
+        "already_registered": "Déjà inscrit ?",
+        "login": "Connectez-vous",
+        "registering": "Inscription en cours...",
+        "register": "S'inscrire",
+        "lastname": "Nom",
+        "firstname": "Prénom",
+        "email": "Adresse email",
+        "phone": "Numéro de téléphone (optionnel)",
+        "address": "Adresse",
+        "city": "Ville",
+        "password": "Mot de passe",
+        "password_confirmation": "Confirmer le mot de passe"
+    },
       modifyReserv:{
         "reservation": {
           "title": "Mes Réservations",
@@ -361,6 +376,21 @@ const resources = {
         },
         legal: "Legal Notice"
       },
+      registerpage:{
+        "title": "Create an account",
+        "already_registered": "Already registered?",
+        "login": "Log in",
+        "registering": "Registering...",
+        "register": "Register",
+        "lastname": "Last name",
+        "firstname": "First name",
+        "email": "Email address",
+        "phone": "Phone number (optional)",
+        "address": "Address",
+        "city": "City",
+        "password": "Password",
+        "password_confirmation": "Confirm password"
+    },
 
       // New keys for car listing
       available_cars: "Available Cars",
@@ -563,6 +593,21 @@ const resources = {
           "saving": "Guardando...",
           "saved": "Guardado."
         },      
+        registerpage:{
+          "title": "Crear una cuenta",
+          "already_registered": "¿Ya estás registrado?",
+          "login": "Iniciar sesión",
+          "registering": "Registrando...",
+          "register": "Registrarse",
+          "lastname": "Apellido",
+          "firstname": "Nombre",
+          "email": "Correo electrónico",
+          "phone": "Número de teléfono (opcional)",
+          "address": "Dirección",
+          "city": "Ciudad",
+          "password": "Contraseña",
+          "password_confirmation": "Confirmar contraseña"
+        },
       // Nuevas claves para la lista de coches
       available_cars: "Coches Disponibles",
       available: "Disponible",

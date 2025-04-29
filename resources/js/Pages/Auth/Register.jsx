@@ -1,8 +1,13 @@
 import React from 'react';
 import { Head, Link, useForm } from '@inertiajs/react';
-
+import { motion } from 'framer-motion';
+import Navbar from '@/Components/Navbar';
+import '../../i18n'; // assure-toi que le chemin est bon
+import { useTranslation } from 'react-i18next';
 
 export default function Register() {
+    const { t } = useTranslation();
+
     const { data, setData, post, processing, errors } = useForm({
         nom: '',
         prenom: '',
@@ -18,44 +23,105 @@ export default function Register() {
         e.preventDefault();
         post(route('register'));
     };
-  
+
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.2
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                duration: 0.5
+            }
+        }
+    };
+
     return (
         <>
-            <Head title="Inscription" />
+        <Navbar/>
+            <Head title={t("registerpage.title")} />
             
-            <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
-                    <div className="text-center">
-                        <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-                            Créer un compte
+            <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f9d5b3] to-[#9cb3c5] py-12 px-4 sm:px-6 lg:px-8">
+                <motion.div 
+                    initial={{ scale: 0.95, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                    className="max-w-md w-full space-y-8 bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-xl"
+                >
+                    <motion.div 
+                        className="text-center"
+                        initial={{ y: -20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <motion.img
+                            src="https://img.icons8.com/fluency/96/000000/car-rental.png"
+                            alt="Logo location voiture"
+                            className="mx-auto h-16 w-16"
+                            animate={{ 
+                                rotate: [0, 5, -5, 0],
+                                y: [0, -5, 0]
+                            }}
+                            transition={{ 
+                                duration: 2,
+                                repeat: Infinity,
+                                repeatType: "reverse"
+                            }}
+                        />
+                        <h2 className="mt-4 text-3xl font-bold text-[#2c3e50]">
+                            {t("registerpage.title")}
                         </h2>
-                        <p className="mt-2 text-sm text-gray-600">
-                            Déjà inscrit?{' '}
-                            <Link href={route('login')} className="font-medium text-indigo-600 hover:text-indigo-500">
-                                Connectez-vous
+                        <p className="mt-2 text-sm text-[#6a7b8c]">
+                            {t("registerpage.already_registered")}{' '}
+                            <Link 
+                                href={route('login')} 
+                                className="font-medium text-[#d1b7b5] hover:text-[#f0c1a0] transition-colors"
+                            >
+                                {t("registerpage.login")}
                             </Link>
                         </p>
-                    </div>
+                    </motion.div>
 
-                    <form className="mt-8 space-y-6" onSubmit={submit}>
+                    <motion.form 
+                        className="mt-8 space-y-6" 
+                        onSubmit={submit}
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
+                    >
                         <div className="rounded-md shadow-sm space-y-4">
-                            {/* Nom et Prénom */}
-                            <div className="grid grid-cols-2 gap-4">
+                            <motion.div 
+                                className="grid grid-cols-2 gap-4"
+                                variants={itemVariants}
+                            >
                                 <div>
-                                    <label htmlFor="nom" className="block text-sm font-medium text-gray-700">
-                                        Nom
+                                    <label htmlFor="nom" className="block text-sm font-medium text-[#6a7b8c]">
+                                        {t("registerpage.lastname")}
                                     </label>
-                                    <input
+                                    <motion.input
                                         id="nom"
                                         name="nom"
                                         type="text"
-                                        autoComplete="family-name"
                                         required
-                                        className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${
-                                            errors.nom ? 'border-red-500' : 'border'
+                                        className={`mt-1 block w-full rounded-lg border ${
+                                            errors.nom ? 'border-red-500' : 'border-[#d1b7b5]'
                                         }`}
                                         value={data.nom}
                                         onChange={(e) => setData('nom', e.target.value)}
+                                        whileFocus={{ 
+                                            boxShadow: "0 0 0 2px #f0c1a0",
+                                            scale: 1.02
+                                        }}
                                     />
                                     {errors.nom && (
                                         <p className="mt-1 text-sm text-red-600">{errors.nom}</p>
@@ -63,172 +129,175 @@ export default function Register() {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="prenom" className="block text-sm font-medium text-gray-700">
-                                        Prénom
+                                    <label htmlFor="prenom" className="block text-sm font-medium text-[#6a7b8c]">
+                                        {t("registerpage.firstname")}
                                     </label>
-                                    <input
+                                    <motion.input
                                         id="prenom"
                                         name="prenom"
                                         type="text"
-                                        autoComplete="given-name"
                                         required
-                                        className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${
-                                            errors.prenom ? 'border-red-500' : 'border'
+                                        className={`mt-1 block w-full rounded-lg border ${
+                                            errors.prenom ? 'border-red-500' : 'border-[#d1b7b5]'
                                         }`}
                                         value={data.prenom}
                                         onChange={(e) => setData('prenom', e.target.value)}
+                                        whileFocus={{ 
+                                            boxShadow: "0 0 0 2px #f0c1a0",
+                                            scale: 1.02
+                                        }}
                                     />
                                     {errors.prenom && (
                                         <p className="mt-1 text-sm text-red-600">{errors.prenom}</p>
                                     )}
                                 </div>
-                            </div>
+                            </motion.div>
 
                             {/* Email */}
-                            <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                    Adresse email
+                            <motion.div variants={itemVariants}>
+                                <label htmlFor="email" className="block text-sm font-medium text-[#6a7b8c]">
+                                    {t("registerpage.email")}
                                 </label>
-                                <input
+                                <motion.input
                                     id="email"
                                     name="email"
                                     type="email"
-                                    autoComplete="email"
                                     required
-                                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${
-                                        errors.email ? 'border-red-500' : 'border'
+                                    className={`mt-1 block w-full rounded-lg border ${
+                                        errors.email ? 'border-red-500' : 'border-[#d1b7b5]'
                                     }`}
                                     value={data.email}
                                     onChange={(e) => setData('email', e.target.value)}
+                                    whileFocus={{ boxShadow: "0 0 0 2px #f0c1a0", scale: 1.02 }}
                                 />
                                 {errors.email && (
                                     <p className="mt-1 text-sm text-red-600">{errors.email}</p>
                                 )}
-                            </div>
+                            </motion.div>
 
                             {/* Téléphone */}
-                            <div>
-                                <label htmlFor="numero_telephone" className="block text-sm font-medium text-gray-700">
-                                    Numéro de téléphone (optionnel)
+                            <motion.div variants={itemVariants}>
+                                <label htmlFor="numero_telephone" className="block text-sm font-medium text-[#6a7b8c]">
+                                    {t("registerpage.phone")}
                                 </label>
-                                <input
+                                <motion.input
                                     id="numero_telephone"
                                     name="numero_telephone"
                                     type="tel"
-                                    autoComplete="tel"
-                                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${
-                                        errors.numero_telephone ? 'border-red-500' : 'border'
+                                    className={`mt-1 block w-full rounded-lg border ${
+                                        errors.numero_telephone ? 'border-red-500' : 'border-[#d1b7b5]'
                                     }`}
                                     value={data.numero_telephone}
                                     onChange={(e) => setData('numero_telephone', e.target.value)}
+                                    whileFocus={{ boxShadow: "0 0 0 2px #f0c1a0", scale: 1.02 }}
                                 />
                                 {errors.numero_telephone && (
                                     <p className="mt-1 text-sm text-red-600">{errors.numero_telephone}</p>
                                 )}
-                            </div>
+                            </motion.div>
 
                             {/* Adresse */}
-                            <div>
-                                <label htmlFor="adresse" className="block text-sm font-medium text-gray-700">
-                                    Adresse
+                            <motion.div variants={itemVariants}>
+                                <label htmlFor="adresse" className="block text-sm font-medium text-[#6a7b8c]">
+                                    {t("registerpage.address")}
                                 </label>
-                                <input
+                                <motion.input
                                     id="adresse"
                                     name="adresse"
                                     type="text"
-                                    autoComplete="street-address"
                                     required
-                                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${
-                                        errors.adresse ? 'border-red-500' : 'border'
+                                    className={`mt-1 block w-full rounded-lg border ${
+                                        errors.adresse ? 'border-red-500' : 'border-[#d1b7b5]'
                                     }`}
                                     value={data.adresse}
                                     onChange={(e) => setData('adresse', e.target.value)}
+                                    whileFocus={{ boxShadow: "0 0 0 2px #f0c1a0", scale: 1.02 }}
                                 />
                                 {errors.adresse && (
                                     <p className="mt-1 text-sm text-red-600">{errors.adresse}</p>
                                 )}
-                            </div>
+                            </motion.div>
 
                             {/* Ville */}
-                            <div>
-                                <label htmlFor="ville" className="block text-sm font-medium text-gray-700">
-                                    Ville
+                            <motion.div variants={itemVariants}>
+                                <label htmlFor="ville" className="block text-sm font-medium text-[#6a7b8c]">
+                                    {t("registerpage.city")}
                                 </label>
-                                <input
+                                <motion.input
                                     id="ville"
                                     name="ville"
                                     type="text"
-                                    autoComplete="address-level2"
                                     required
-                                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${
-                                        errors.ville ? 'border-red-500' : 'border'
+                                    className={`mt-1 block w-full rounded-lg border ${
+                                        errors.ville ? 'border-red-500' : 'border-[#d1b7b5]'
                                     }`}
                                     value={data.ville}
                                     onChange={(e) => setData('ville', e.target.value)}
+                                    whileFocus={{ boxShadow: "0 0 0 2px #f0c1a0", scale: 1.02 }}
                                 />
                                 {errors.ville && (
                                     <p className="mt-1 text-sm text-red-600">{errors.ville}</p>
                                 )}
-                            </div>
+                            </motion.div>
 
                             {/* Mot de passe */}
-                            <div>
-                                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                                    Mot de passe
+                            <motion.div variants={itemVariants}>
+                                <label htmlFor="password" className="block text-sm font-medium text-[#6a7b8c]">
+                                    {t("registerpage.password")}
                                 </label>
-                                <input
+                                <motion.input
                                     id="password"
                                     name="password"
                                     type="password"
-                                    autoComplete="new-password"
                                     required
-                                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${
-                                        errors.password ? 'border-red-500' : 'border'
+                                    className={`mt-1 block w-full rounded-lg border ${
+                                        errors.password ? 'border-red-500' : 'border-[#d1b7b5]'
                                     }`}
                                     value={data.password}
                                     onChange={(e) => setData('password', e.target.value)}
+                                    whileFocus={{ boxShadow: "0 0 0 2px #f0c1a0", scale: 1.02 }}
                                 />
                                 {errors.password && (
                                     <p className="mt-1 text-sm text-red-600">{errors.password}</p>
                                 )}
-                            </div>
+                            </motion.div>
 
                             {/* Confirmation mot de passe */}
-                            <div>
-                                <label htmlFor="password_confirmation" className="block text-sm font-medium text-gray-700">
-                                    Confirmer le mot de passe
+                            <motion.div variants={itemVariants}>
+                                <label htmlFor="password_confirmation" className="block text-sm font-medium text-[#6a7b8c]">
+                                    {t("registerpage.password_confirmation")}
                                 </label>
-                                <input
+                                <motion.input
                                     id="password_confirmation"
                                     name="password_confirmation"
                                     type="password"
-                                    autoComplete="new-password"
                                     required
-                                    className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${
-                                        errors.password_confirmation ? 'border-red-500' : 'border'
+                                    className={`mt-1 block w-full rounded-lg border ${
+                                        errors.password_confirmation ? 'border-red-500' : 'border-[#d1b7b5]'
                                     }`}
                                     value={data.password_confirmation}
                                     onChange={(e) => setData('password_confirmation', e.target.value)}
+                                    whileFocus={{ boxShadow: "0 0 0 2px #f0c1a0", scale: 1.02 }}
                                 />
                                 {errors.password_confirmation && (
                                     <p className="mt-1 text-sm text-red-600">{errors.password_confirmation}</p>
                                 )}
-                            </div>
+                            </motion.div>
                         </div>
 
-                        <div>
-                            <button
+                        <motion.div variants={itemVariants}>
+                            <motion.button
                                 type="submit"
                                 disabled={processing}
-                                className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
-                                    processing ? 'opacity-75 cursor-not-allowed' : ''
-                                }`}
+                                className={`group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-[#f9d5b3] to-[#d1b7b5] hover:from-[#f0c1a0] hover:to-[#b7c7d6] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#9cb3c5] ${processing ? 'opacity-75 cursor-not-allowed' : ''}`}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
                             >
-                                {processing ? 'Inscription en cours...' : 'S\'inscrire'}
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                                {processing ? t("registerpage.registering") : t("registerpage.register")}
+                            </motion.button>
+                        </motion.div>
+                    </motion.form>
+                </motion.div>
             </div>
         </>
     );
