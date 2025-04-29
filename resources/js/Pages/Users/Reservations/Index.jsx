@@ -3,6 +3,7 @@ import { router, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import UserNavbar from '@/Components/UserNavbar';
 import { useTranslation } from 'react-i18next';
+import Footer from '@/Components/Footer';
 
 const Index = ({ reservations }) => {
     const { t } = useTranslation();
@@ -193,6 +194,7 @@ const Index = ({ reservations }) => {
                     </motion.div>
                 </motion.div>
             </div>
+            <Footer/>
         </>
     );
 };

@@ -76,9 +76,6 @@ require __DIR__.'/auth.php';
         // Enregistrer une nouvelle réservation
         Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
         
-        // Afficher les détails d'une réservation
-        Route::get('/reservations/{reservation}', [ReservationController::class, 'show'])->name('reservations.show');
-        
         // Confirmer une réservation via email
         Route::get('/reservations/{id}/confirm', [ReservationController::class, 'confirm'])->name('reservations.confirm');
         

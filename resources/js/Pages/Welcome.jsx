@@ -38,7 +38,7 @@ export default function Welcome({ auth }) {
                     
                     <div className="flex flex-col sm:flex-row justify-center gap-6">
                         <Link 
-                            href="/vehicles"
+                            href={route('List.cars')}
                             className="relative inline-flex items-center justify-center px-12 py-5 overflow-hidden text-xl font-medium text-[#9cb3c5] border-2 border-[#d1b7b5] rounded-lg group hover:bg-gradient-to-r from-[#f9d5b3]/20 to-[#9cb3c5]/20 transition-all duration-500 hover:shadow-lg hover:shadow-[#f0c1a0]/30"
                         >
                             <span className="absolute inset-0 bg-white/10 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
