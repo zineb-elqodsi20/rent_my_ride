@@ -16,12 +16,45 @@ const resources = {
       contact: "Contact",
       profile: "Profil",
       logout: "Déconnexion",
+    "updateProfile": {
+    "title": "Informations du profil",
+    "description": "Mettez à jour les informations de votre compte et votre adresse email.",
+    "name": "Nom",
+    "email": "Email",
+    "unverified": "Votre adresse email n'est pas vérifiée.",
+    "resend": "Cliquez ici pour renvoyer l'email de vérification.",
+    "linkSent": "Un nouveau lien de vérification a été envoyé à votre adresse email.",
+    "save": "Enregistrer",
+    "saving": "Enregistrement...",
+    "saved": "Enregistré."
+  },
+      "profiledel": {
+        "deleteAccount": {
+          "title": "Supprimer le compte",
+          "description": "Une fois votre compte supprimé, toutes vos ressources et données seront définitivement effacées. Avant de supprimer votre compte, veuillez télécharger toute donnée ou information que vous souhaitez conserver.",
+          "confirm": "Êtes-vous sûr de vouloir supprimer votre compte ?",
+          "password": "Mot de passe",
+          "cancel": "Annuler",
+          "delete": "Supprimer le compte"
+        }
+      },
+      "updatePassword": {
+        "title": "Modifier le mot de passe",
+        "description": "Utilisez un mot de passe fort et unique pour sécuriser votre compte.",
+        "current": "Mot de passe actuel",
+        "new": "Nouveau mot de passe",
+        "confirm": "Confirmer le mot de passe",
+        "save": "Sauvegarder",
+        "saving": "En cours...",
+        "updated": "Mot de passe mis à jour."
+      },
       modifyReserv:{
         "reservation": {
           "title": "Mes Réservations",
           "subtitle": "Gérez l'ensemble de vos locations en cours et à venir",
           "confirm_delete": "Êtes-vous sûr de vouloir supprimer cette réservation ?",
           "no_reservations": "Aucune réservation trouvée",
+          "no_reservations_hint": "Vous n'avez encore aucune réservation.",
           "table": {
             "car": "Voiture",
             "start": "Début",
@@ -37,7 +70,8 @@ const resources = {
         },
         "buttons": {
           "edit": "Modifier",
-          "delete": "Supprimer"
+          "delete": "Supprimer",
+          "browse_cars": "Parcourir les voitures"
         }
       },      
       // Page d'accueil - Hero section
@@ -183,6 +217,7 @@ const resources = {
     "subtitle": "Manage all your current and upcoming rentals",
     "confirm_delete": "Are you sure you want to delete this reservation?",
     "no_reservations": "No reservations found",
+    "no_reservations_hint": "You don't have any reservations yet.",
     "table": {
       "car": "Car",
       "start": "Start",
@@ -198,7 +233,8 @@ const resources = {
   },
   "buttons": {
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+     "browse_cars": "Browse Cars"
   }
 },
       
@@ -232,6 +268,17 @@ const resources = {
       convertibles: "Convertibles",
       daily_rate: "Daily rate",
       from: "From",
+
+      "updatePassword": {
+    "title": "Update Password",
+    "description": "Use a strong and unique password to secure your account.",
+    "current": "Current Password",
+    "new": "New Password",
+    "confirm": "Confirm Password",
+    "save": "Save",
+    "saving": "Saving...",
+    "updated": "Password updated."
+      },
 
       // Booking form
       select_vehicle: "Select a vehicle",
@@ -304,6 +351,29 @@ const resources = {
       per_day: "day",
       reserve: "Reserve",
 
+       "profiledel": {
+    "deleteAccount": {
+      "title": "Delete Account",
+      "description": "Once your account is deleted, all of your resources and data will be permanently removed. Before deleting your account, please download any data or information you wish to retain.",
+      "confirm": "Are you sure you want to delete your account?",
+      "password": "Password",
+      "cancel": "Cancel",
+      "delete": "Delete Account"
+    }
+  },
+  "updateProfile": {
+    "title": "Profile Information",
+    "description": "Update your account's profile information and email address.",
+    "name": "Name",
+    "email": "Email",
+    "unverified": "Your email address is unverified.",
+    "resend": "Click here to re-send the verification email.",
+    "linkSent": "A new verification link has been sent to your email address.",
+    "save": "Save",
+    "saving": "Saving...",
+    "saved": "Saved."
+  },
+
       // Contact page translations
       contact_subtitle: "We're here to answer all your questions about our luxury vehicles.",
       contact_form_title: "Send us a message",
@@ -350,6 +420,7 @@ const resources = {
     "subtitle": "Gestiona todas tus reservas actuales y futuras",
     "confirm_delete": "¿Estás seguro de que deseas eliminar esta reserva?",
     "no_reservations": "No se encontraron reservas",
+    "no_reservations_hint": "Todavía no tienes ninguna reserva.",
     "table": {
       "car": "Coche",
       "start": "Inicio",
@@ -360,7 +431,8 @@ const resources = {
     "status": {
       "confirmée": "Confirmada",
       "en attente": "Pendiente",
-      "annulée": "Cancelada"
+      "annulée": "Cancelada",
+      "browse_cars": "Buscar coches"
     }
   },
   "buttons": {
@@ -458,7 +530,19 @@ const resources = {
         },
         legal: "Aviso legal"
       },
-
+      
+        "updateProfile": {
+          "title": "Información del perfil",
+          "description": "Actualiza la información de tu cuenta y tu correo electrónico.",
+          "name": "Nombre",
+          "email": "Correo electrónico",
+          "unverified": "Tu dirección de correo electrónico no está verificada.",
+          "resend": "Haz clic aquí para reenviar el correo de verificación.",
+          "linkSent": "Se ha enviado un nuevo enlace de verificación.",
+          "save": "Guardar",
+          "saving": "Guardando...",
+          "saved": "Guardado."
+        },      
       // Nuevas claves para la lista de coches
       available_cars: "Coches Disponibles",
       available: "Disponible",
@@ -468,15 +552,27 @@ const resources = {
       per_day: "día",
       reserve: "Reservar",
 
-     profiledel: {"deleteAccount": {
-    "title": "Eliminar cuenta",
-    "description": "Una vez que se elimine su cuenta, todos sus recursos y datos serán eliminados permanentemente. Antes de eliminar su cuenta, descargue cualquier dato o información que desee conservar.",
-    "confirm": "¿Está seguro de que desea eliminar su cuenta?",
-    "password": "Contraseña",
-    "cancel": "Cancelar",
-    "delete": "Eliminar cuenta"
-  }},
-      
+      "updatePassword": {
+  "title": "Cambiar la contraseña",
+  "description": "Utiliza una contraseña fuerte y única para proteger tu cuenta.",
+  "current": "Contraseña actual",
+  "new": "Nueva contraseña",
+  "confirm": "Confirmar contraseña",
+  "save": "Guardar",
+  "saving": "Guardando...",
+  "updated": "Contraseña actualizada."
+},
+
+      "profiledel": {
+        "deleteAccount": {
+          "title": "Eliminar cuenta",
+          "description": "Una vez que se elimine su cuenta, todos sus recursos y datos serán eliminados permanentemente. Antes de eliminar su cuenta, descargue cualquier dato o información que desee conservar.",
+          "confirm": "¿Está seguro de que desea eliminar su cuenta?",
+          "password": "Contraseña",
+          "cancel": "Cancelar",
+          "delete": "Eliminar cuenta"
+        }
+      },
 
       // Traducciones para la página de Contacto
       contact_subtitle: "Estamos aquí para responder a todas tus preguntas sobre nuestros vehículos de lujo.",

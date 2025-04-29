@@ -9,7 +9,7 @@ import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export default function DeleteUserForm({ className = '' }) {
-    const { t } = useTranslation(['profile', 'common']);
+    const { t } = useTranslation(['translation']);
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
     const passwordInput = useRef();
 
@@ -50,11 +50,11 @@ export default function DeleteUserForm({ className = '' }) {
         <section className={`space-y-6 ${className}`}>
             <header>
                 <h2 className="text-lg font-medium animate-gradient-text bg-gradient-to-r from-[#f9d5b3] via-[#f0c1a0] via-[#d1b7b5] via-[#b7c7d6] to-[#9cb3c5] bg-clip-text text-transparent">
-                    {t('profile:profiledel.deleteAccount.title')}
+                    {t('profiledel.deleteAccount.title')}
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-600 transition-colors duration-300 hover:text-[#9cb3c5]">
-                    {t('profile:profiledel.deleteAccount.description')}
+                    {t('profiledel.deleteAccount.description')}
                 </p>
             </header>
 
@@ -62,24 +62,24 @@ export default function DeleteUserForm({ className = '' }) {
                 onClick={confirmUserDeletion}
                 className="relative overflow-hidden group"
             >
-                <span className="relative z-10">{t('profile:profiledel.deleteAccount.delete')}</span>
+                <span className="relative z-10">{t('profiledel.deleteAccount.delete')}</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-[#f9d5b3] via-[#f0c1a0] to-[#d1b7b5] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </DangerButton>
 
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
                 <form onSubmit={deleteUser} className="p-6 bg-gradient-to-br from-white to-[#f9d5b3]/10">
                     <h2 className="text-lg font-medium text-[#9cb3c5]">
-                        {t('profile:profiledel.deleteAccount.confirm')}
+                        {t('profiledel.deleteAccount.confirm')}
                     </h2>
 
                     <p className="mt-1 text-sm text-gray-600">
-                        {t('profile:profiledel.deleteAccount.description')}
+                        {t('profiledel.deleteAccount.description')}
                     </p>
 
                     <div className="mt-6">
                         <InputLabel
                             htmlFor="password"
-                            value={t('profile:profiledel.deleteAccount.password')}
+                            value={t('profiledel.deleteAccount.password')}
                             className="sr-only"
                         />
 
@@ -92,7 +92,7 @@ export default function DeleteUserForm({ className = '' }) {
                             onChange={(e) => setData('password', e.target.value)}
                             className="mt-1 block w-3/4 border-[#b7c7d6] focus:border-[#9cb3c5] focus:ring-[#9cb3c5] rounded-md shadow-sm transition-all duration-300 focus:ring-2 focus:ring-opacity-50"
                             isFocused
-                            placeholder={t('profile:profiledel.deleteAccount.password')}
+                            placeholder={t('profiledel.deleteAccount.password')}
                         />
 
                         <InputError message={errors.password} className="mt-2 text-[#f0c1a0]" />
@@ -103,14 +103,14 @@ export default function DeleteUserForm({ className = '' }) {
                             onClick={closeModal}
                             className="bg-[#b7c7d6] hover:bg-[#9cb3c5] text-white transition-colors duration-300"
                         >
-                            {t('profile:profiledel.deleteAccount.cancel')}
+                            {t('profiledel.deleteAccount.cancel')}
                         </SecondaryButton>
 
                         <DangerButton 
                             className="ms-3 bg-gradient-to-r from-[#f0c1a0] to-[#d1b7b5] hover:from-[#f9d5b3] hover:to-[#f0c1a0] transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-[#f0c1a0]/30"
                             disabled={processing}
                         >
-                            {processing ? t('common:processing') : t('profile:profiledel.deleteAccount.delete')}
+                            {processing ? t('common:processing') : t('profiledel.deleteAccount.delete')}
                         </DangerButton>
                     </div>
                 </form>

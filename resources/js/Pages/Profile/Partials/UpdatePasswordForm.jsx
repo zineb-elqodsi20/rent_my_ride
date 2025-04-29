@@ -5,8 +5,10 @@ import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
 import { useForm } from '@inertiajs/react';
 import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function UpdatePasswordForm({ className = '' }) {
+    const { t } = useTranslation('translation'); // On utilise le namespace 'profile'
     const passwordInput = useRef();
     const currentPasswordInput = useRef();
 
@@ -48,11 +50,11 @@ export default function UpdatePasswordForm({ className = '' }) {
         <section className={`${className} bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300`}>
             <header>
                 <h2 className="text-lg font-bold animate-gradient-text bg-gradient-to-r from-[#f9d5b3] via-[#f0c1a0] via-[#d1b7b5] via-[#b7c7d6] to-[#9cb3c5] bg-clip-text text-transparent">
-                    Modifier le mot de passe
+                    {t('updatePassword.title')}
                 </h2>
 
                 <p className="mt-1 text-sm text-[#9cb3c5] transition-colors duration-300 hover:text-[#f0c1a0]">
-                    Utilisez un mot de passe fort et unique pour sécuriser votre compte.
+                    {t('updatePassword.description')}
                 </p>
             </header>
 
@@ -60,7 +62,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                 <div>
                     <InputLabel
                         htmlFor="current_password"
-                        value="Mot de passe actuel"
+                        value={t('updatePassword.current')}
                         className="text-[#b7c7d6] transition-colors duration-300 hover:text-[#f0c1a0]"
                     />
 
@@ -85,7 +87,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                 <div>
                     <InputLabel
                         htmlFor="password"
-                        value="Nouveau mot de passe"
+                        value={t('updatePassword.new')}
                         className="text-[#b7c7d6] transition-colors duration-300 hover:text-[#f0c1a0]"
                     />
 
@@ -108,7 +110,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                 <div>
                     <InputLabel
                         htmlFor="password_confirmation"
-                        value="Confirmer le mot de passe"
+                        value={t('updatePassword.confirm')}
                         className="text-[#b7c7d6] transition-colors duration-300 hover:text-[#f0c1a0]"
                     />
 
@@ -135,7 +137,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                         className="relative overflow-hidden group bg-gradient-to-r from-[#b7c7d6] to-[#9cb3c5] hover:from-[#f9d5b3] hover:to-[#f0c1a0] transition-all duration-500 shadow-md hover:shadow-lg hover:shadow-[#f0c1a0]/30"
                     >
                         <span className="relative z-10">
-                            {processing ? 'En cours...' : 'Sauvegarder'}
+                            {processing ? t('updatePassword.saving') : t('updatePassword.save')}
                         </span>
                         <span className="absolute inset-0 bg-gradient-to-r from-[#f9d5b3] to-[#d1b7b5] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                     </PrimaryButton>
@@ -150,7 +152,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                         leaveTo="opacity-0 translate-x-4"
                     >
                         <p className="text-sm text-[#9cb3c5] animate-pulse">
-                            Mot de passe mis à jour.
+                            {t('updatePassword.updated')}
                         </p>
                     </Transition>
                 </div>
