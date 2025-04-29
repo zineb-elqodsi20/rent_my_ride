@@ -44,11 +44,18 @@ class UserReservationController extends Controller
     public function destroy(Reservation $reservation)
     {
         $this->authorizeReservation($reservation);
-
+    
+        $car = $reservation->car;
+        if ($car) {
+            $car->disponibilite = 1;
+            $car->save();
+        }
+    
         $reservation->delete();
+    
         return redirect()->back()->with('success', 'Réservation supprimée.');
     }
-
+    
     private function authorizeReservation(Reservation $reservation)
     {
         if ($reservation->user_id !== auth()->id()) {
