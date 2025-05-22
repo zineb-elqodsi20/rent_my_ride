@@ -11,7 +11,6 @@ export default function UserListCars({ cars }) {
     <>
       <UserNavbar />
 
-      {/* Hero Section avec dégradé */}
       <div className="bg-gradient-to-r from-[#f9d5b3] via-[#d1b7b5] to-[#9cb3c5] py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h1
@@ -28,7 +27,6 @@ export default function UserListCars({ cars }) {
         </div>
       </div>
 
-      {/* Grille de voitures */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <motion.div
           initial={{ opacity: 0 }}

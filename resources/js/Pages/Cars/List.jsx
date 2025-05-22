@@ -106,33 +106,33 @@ export default function ListCars({ cars }) {
                       {car.description}
                     </p>
                   )}
+<div className="mt-auto pt-4 border-t border-[#b7c7d6]/30 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+  <div className="min-w-0">
+    <span className="text-[#2c3e50]/60 text-sm">À partir de</span>
+    <p className="text-2xl font-bold text-[#9cb3c5] truncate">{car.prix_par_jour} MAD</p>
+    <span className="text-[#2c3e50]/60 text-xs">/ jour</span>
+  </div>
 
-                  <div className="flex items-center justify-between mt-4 border-t border-[#b7c7d6]/30 pt-4">
-                    <div>
-                      <span className="text-[#2c3e50]/60 text-sm">À partir de</span>
-                      <p className="text-2xl font-bold text-[#9cb3c5]">{car.prix_par_jour} MAD</p>
-                      <span className="text-[#2c3e50]/60 text-xs">/ jour</span>
-                    </div>
+  <div className="flex flex-wrap justify-end gap-2 w-full sm:w-auto">
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      onClick={() => handleEdit(car.id)}
+      className="px-4 py-2 bg-[#9cb3c5] text-white text-sm font-medium rounded-lg hover:bg-[#b7c7d6] transition-colors shadow-md"
+    >
+      Modifier
+    </motion.button>
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      onClick={() => handleDelete(car.id)}
+      className="px-4 py-2 bg-white text-[#d1b7b5] text-sm font-medium rounded-lg border border-[#d1b7b5] hover:bg-[#f9d5b3]/20 transition-colors"
+    >
+      Supprimer
+    </motion.button>
+  </div>
+</div>
 
-                    <div className="flex space-x-2">
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => handleEdit(car.id)}
-                        className="px-4 py-2 bg-[#9cb3c5] text-white text-sm font-medium rounded-lg hover:bg-[#b7c7d6] transition-colors shadow-md"
-                      >
-                        Modifier
-                      </motion.button>
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => handleDelete(car.id)}
-                        className="px-4 py-2 bg-white text-[#d1b7b5] text-sm font-medium rounded-lg border border-[#d1b7b5] hover:bg-[#f9d5b3]/20 transition-colors"
-                      >
-                        Supprimer
-                      </motion.button>
-                    </div>
-                  </div>
                 </div>
               </motion.div>
             ))}
