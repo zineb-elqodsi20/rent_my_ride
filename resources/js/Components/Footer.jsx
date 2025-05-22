@@ -23,7 +23,7 @@ const Footer = () => {
               <Link href="/" className="hover:text-[#7a8fa3] transition-colors">
                 {t('home')}
               </Link>
-              <Link href="/List.cars" className="hover:text-[#7a8fa3] transition-colors">
+              <Link href="/list/cars" className="hover:text-[#7a8fa3] transition-colors">
                 {t('List.cars')}
               </Link>
               <Link href="/about" className="hover:text-[#7a8fa3] transition-colors">

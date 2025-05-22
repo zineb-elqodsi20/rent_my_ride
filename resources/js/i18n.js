@@ -5,6 +5,21 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 const resources = {
   fr: {
     translation: {
+      "my_bookings": "Mes Réservations",
+      "sign_in": "Se connecter",
+       "not_registered_yet": "Pas encore inscrit ?",
+      "email_address": "Adresse email",
+      "forgotPassword": {
+    "title": "Mot de passe oublié",
+    "heading": "Réinitialiser votre mot de passe",
+    "description": "Mot de passe oublié ? Aucun problème. Indiquez-nous simplement votre adresse e-mail et nous vous enverrons un lien de réinitialisation qui vous permettra d'en choisir un nouveau.",
+    "button": "Envoyer le lien de réinitialisation",
+    "sending": "Envoi en cours...",
+    "emailPlaceholder": "E-mail",
+    "statusMessages": {
+      "sent": "Nous avons envoyé votre lien de réinitialisation par e-mail !"
+    }
+  },
       // Navigation
       welcome: "Bienvenue",
       login: "Connexion",
@@ -67,7 +82,7 @@ const resources = {
         "lastname": "Nom",
         "firstname": "Prénom",
         "email": "Adresse email",
-        "phone": "Numéro de téléphone (optionnel)",
+        "phone": "Numéro de téléphone ",
         "address": "Adresse",
         "city": "Ville",
         "password": "Mot de passe",
@@ -223,6 +238,23 @@ const resources = {
   },
   en: {
     translation: {
+      "login": "Login",
+      "not_registered_yet": "Not registered yet?",
+      "create_account": "Create an account",
+      "email_address": "Email address",
+      "password": "Password",
+      "sign_in": "Sign in",
+      "forgotPassword": {
+    "title": "Forgot Password",
+    "heading": "Reset Your Password",
+    "description": "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.",
+    "button": "Email Password Reset Link",
+    "sending": "Sending...",
+    "emailPlaceholder": "Email",
+    "statusMessages": {
+      "sent": "We've emailed your password reset link!"
+    }
+  },
       // Navigation
       welcome: "Welcome",
       login: "Login",
@@ -272,6 +304,7 @@ const resources = {
       premium_vehicles: "Premium vehicles for your exceptional moments.",
       book_now: "Book now",
       view_vehicles: "View vehicles",
+      "my_bookings": "My Bookings",
 
       // Old translations
       welcome_title: "Welcome to Rent My Ride",
@@ -385,7 +418,7 @@ const resources = {
         "lastname": "Last name",
         "firstname": "First name",
         "email": "Email address",
-        "phone": "Phone number (optional)",
+        "phone": "Phone number",
         "address": "Address",
         "city": "City",
         "password": "Password",
@@ -451,6 +484,22 @@ const resources = {
   },
   es: {
     translation: {
+      "my_bookings": "Mis Reservas",
+      "not_registered_yet": "¿No estás registrado?",
+      "email_address": "Correo electrónico",
+      "password": "Contraseña",
+      "sign_in": "Iniciar sesión",
+      "forgotPassword": {
+    "title": "Olvidé mi contraseña",
+    "heading": "Restablecer su contraseña",
+    "description": "¿Olvidó su contraseña? No hay problema. Simplemente indíquenos su dirección de correo electrónico y le enviaremos un enlace para restablecer la contraseña que le permitirá elegir una nueva.",
+    "button": "Enviar enlace de restablecimiento",
+    "sending": "Enviando...",
+    "emailPlaceholder": "Correo electrónico",
+    "statusMessages": {
+      "sent": "¡Hemos enviado su enlace de restablecimiento de contraseña por correo electrónico!"
+    }
+  },
       // Navigation
       welcome: "Bienvenido",
       login: "Iniciar sesión",
@@ -602,7 +651,7 @@ const resources = {
           "lastname": "Apellido",
           "firstname": "Nombre",
           "email": "Correo electrónico",
-          "phone": "Número de teléfono (opcional)",
+          "phone": "Número de teléfono ",
           "address": "Dirección",
           "city": "Ciudad",
           "password": "Contraseña",

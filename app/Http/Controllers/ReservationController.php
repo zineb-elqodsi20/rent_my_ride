@@ -79,11 +79,10 @@ class ReservationController extends Controller
 
     public function confirm($id)
     {
-        $reservation = Reservation::findOrFail($id);
-        $reservation->update(['status' => 'confirmed']);
-        return redirect()->route('reservations.show', $reservation->id)->with('success', 'Réservation confirmée.');
+        DB::statement('CALL ConfirmReservation(?)', [$id]);
+    
+        return redirect()->route('reservations.show', $id)->with('success', 'Réservation confirmée.');
     }
-
     public function cancel(Reservation $reservation)
     {
         $reservation->update(['status' => 'cancelled']);

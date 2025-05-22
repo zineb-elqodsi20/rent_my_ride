@@ -55,7 +55,7 @@ export default function UserNavbar() {
                                        after:h-0.5 after:bg-gray-900 after:scale-x-0 after:origin-left
                                        after:transition-transform after:duration-200 hover:after:scale-x-100"
                         >
-                            {t('Mes Réservations')}
+                            {t('my_bookings')}
                         </Link>
                     </div>
                     

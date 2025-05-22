@@ -72,7 +72,7 @@ export default function UserDashboard({ user }) {
                                     variants={item}
                                 >
                                     <span className="px-4 py-2 bg-white/20 rounded-full text-sm font-semibold text-gray-800 backdrop-blur-lg border border-white/30">
-                                        👋 {t('dashUser.welcome_back')}, {user.nom} !
+                                        👋 {t('dashUser.welcome_back')}, {user.prenom} !
                                     </span>
                                 </motion.div>
                             </motion.div>
@@ -106,7 +106,7 @@ export default function UserDashboard({ user }) {
                                         }}
                                     >
                                         <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#f9d5b3] to-[#9cb3c5] flex items-center justify-center text-white text-2xl font-bold">
-                                            {user.nom.charAt(0).toUpperCase()}
+                                            {user.prenom.charAt(0).toUpperCase()}
                                         </div>
                                     </motion.div>
                                 </div>
