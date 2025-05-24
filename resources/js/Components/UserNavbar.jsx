@@ -74,6 +74,7 @@ export default function UserNavbar() {
                                 <option value="fr">Français</option>
                                 <option value="en">English</option>
                                 <option value="es">Español</option>
+                                
                             </select>
                             <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
                                 <svg className="w-4 h-4 text-[#d1b7b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
