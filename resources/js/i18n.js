@@ -5,6 +5,23 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 const resources = {
   fr: {
     translation: {
+      updateprofile: {
+    "update_title": "Informations du profil",
+    "update_description": "Mettez à jour les informations de votre profil et votre adresse email.",
+    "last_name": "Nom",
+    "first_name": "Prénom",
+    "email": "Email",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "city": "Ville",
+    "email_unverified": "Votre adresse email n'est pas vérifiée.",
+    "resend_verification": "Cliquez ici pour renvoyer l'email de vérification.",
+    "verification_sent": "Un nouveau lien de vérification a été envoyé à votre adresse email.",
+    "save": "Enregistrer",
+    "saving": "Enregistrement...",
+    "saved": "Enregistré."
+  },
+          
       "my_bookings": "Mes Réservations",
       "sign_in": "Se connecter",
        "not_registered_yet": "Pas encore inscrit ?",
@@ -238,6 +255,22 @@ const resources = {
   },
   en: {
     translation: {
+      updateprofile: {
+    "update_title": "Profile Information",
+    "update_description": "Update your account's profile information and email address.",
+    "last_name": "Last Name",
+    "first_name": "First Name",
+    "email": "Email",
+    "phone": "Phone Number",
+    "address": "Address",
+    "city": "City",
+    "email_unverified": "Your email address is unverified.",
+    "resend_verification": "Click here to re-send the verification email.",
+    "verification_sent": "A new verification link has been sent to your email address.",
+    "save": "Save",
+    "saving": "Saving...",
+    "saved": "Saved."
+  },
       "login": "Login",
       "not_registered_yet": "Not registered yet?",
       "create_account": "Create an account",
@@ -444,19 +477,6 @@ const resources = {
       "delete": "Delete Account"
     }
   },
-  "updateProfile": {
-    "title": "Profile Information",
-    "description": "Update your account's profile information and email address.",
-    "name": "Name",
-    "email": "Email",
-    "unverified": "Your email address is unverified.",
-    "resend": "Click here to re-send the verification email.",
-    "linkSent": "A new verification link has been sent to your email address.",
-    "save": "Save",
-    "saving": "Saving...",
-    "saved": "Saved."
-  },
-
       // Contact page translations
       contact_subtitle: "We're here to answer all your questions about our luxury vehicles.",
       contact_form_title: "Send us a message",
@@ -484,6 +504,22 @@ const resources = {
   },
   es: {
     translation: {
+      updateprofile: {
+    "update_title": "Información del perfil",
+    "update_description": "Actualice la información de su perfil y dirección de correo electrónico.",
+    "last_name": "Apellido",
+    "first_name": "Nombre",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "address": "Dirección",
+    "city": "Ciudad",
+    "email_unverified": "Su dirección de correo electrónico no está verificada.",
+    "resend_verification": "Haga clic aquí para reenviar el correo de verificación.",
+    "verification_sent": "Se ha enviado un nuevo enlace de verificación a su dirección de correo electrónico.",
+    "save": "Guardar",
+    "saving": "Guardando...",
+    "saved": "Guardado."
+  },
       "my_bookings": "Mis Reservas",
       "not_registered_yet": "¿No estás registrado?",
       "email_address": "Correo electrónico",
