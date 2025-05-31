@@ -9,7 +9,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6; /* lighter gray for better contrast */
+            background-color: #f3f4f6; 
         }
 
         .header-bg {
@@ -108,11 +108,11 @@
                     </tr>
                     <tr>
                         <th>Prix par jour</th>
-                        <td>{{ number_format($reservation->car->prix_par_jour, 2, ',', ' ') }} €</td>
+                        <td>{{ number_format($reservation->car->prix_par_jour, 2, ',', ' ') }} DH</td>
                     </tr>
                     <tr>
                         <th>Prix total</th>
-                        <td>{{ number_format($reservation->total_price, 2, ',', ' ') }} €</td>
+                        <td>{{ number_format($reservation->total_price, 2, ',', ' ') }} DH</td>
                     </tr>
                     <tr>
                         <th>Statut</th>
@@ -134,6 +134,7 @@
             <div class="text-center mt-10">
                 <p class="text-gray-600 text-base mb-1">Merci pour votre confiance.</p>
                 <p class="text-gray-400 text-sm">Ce document est un reçu officiel de votre réservation.</p>
+                 <p>Vous devez venir récupérer la voiture dans les 24 heures suivant la date de début de réservation, sinon la réservation sera annulée.</p>
                 <div class="divider"></div>
             </div>
         </div>

@@ -21,7 +21,7 @@ class ReservationConfirmation extends Mailable
 
     public function build()
     {
-        // Generate PDF
+        // generation de pdf
         $pdf = Pdf::loadView('pdf.reservation', [
             'reservation' => $this->reservation->load(['car' => function($query) {
                 $query->select('id', 'nom', 'prix_par_jour');
@@ -35,6 +35,7 @@ class ReservationConfirmation extends Mailable
                 'car' => $this->reservation->car,
                 'user' => $this->reservation->user,
             ])
+            //envoie en piece jointe
             ->attachData($pdf->output(), 'receipt_' . $this->reservation->id . '.pdf', [
                 'mime' => 'application/pdf',
             ]);
