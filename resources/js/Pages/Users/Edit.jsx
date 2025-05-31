@@ -22,7 +22,7 @@ export default function EditUser({ user }) {
     post(route('users.update', user.id));
   };
 
-  // Animations
+
   const container = {
     hidden: { opacity: 0 },
     show: {

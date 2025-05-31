@@ -82,7 +82,7 @@ class CarController extends Controller
         }
         $validated['photo'] = $request->file('photo')->store('cars', 'public');
     } else {
-        unset($validated['photo']); // Correction clé ici
+        unset($validated['photo']); 
     }
 
     $car->update($validated);

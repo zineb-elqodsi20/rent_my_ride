@@ -82,8 +82,8 @@ require __DIR__.'/auth.php';
         // Annuler une réservation (admin uniquement, vérifié dans le contrôleur)
         Route::post('/reservations/{reservation}/cancel', [ReservationController::class, 'cancel'])->name('reservations.cancel');
         
-        // Télécharger le reçu PDF
-        Route::get('/reservations/{reservation}/download', [ReservationController::class, 'downloadPdf'])->name('reservations.downloadPdf');
+      
+
         Route::get('list/cars/user',[UserController::class,'userlistcars'])->name('List.carsuser');
         Route::get('/mes-reservations', [UserReservationController::class, 'index'])->name('user.reservations');
         Route::get('/mes-reservations/{reservation}/edit', [UserReservationController::class, 'edit'])->name('user.reservations.edit');
