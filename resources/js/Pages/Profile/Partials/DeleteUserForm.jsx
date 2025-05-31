@@ -101,7 +101,7 @@ export default function DeleteUserForm({ className = '' }) {
                     <div className="mt-6 flex justify-end space-x-3">
                         <SecondaryButton 
                             onClick={closeModal}
-                            className="bg-[#b7c7d6] hover:bg-[#9cb3c5] text-white transition-colors duration-300"
+                            className="bg-green-500 hover:bg-[#9cb3c5] text-white transition-colors duration-300"
                         >
                             {t('profiledel.deleteAccount.cancel')}
                         </SecondaryButton>
