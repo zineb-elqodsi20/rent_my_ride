@@ -31,12 +31,12 @@ class ReservationController extends Controller
 
         $car = Car::findOrFail($validated['car_id']);
 
-        // 🔐 Vérifier disponibilité
+        //  Vérifier disponibilité
         if (!$car->disponibilite) {
             return back()->withErrors(['car_unavailable' => 'Cette voiture est actuellement indisponible.']);
         }
 
-        // 🛑 Vérifier conflit de dates
+        //Vérifier conflit de dates
         $existing = Reservation::where('car_id', $validated['car_id'])
             ->where('status', '!=', 'cancelled')
             ->where(function ($query) use ($validated) {
@@ -65,7 +65,7 @@ class ReservationController extends Controller
             'status' => 'pending',
         ]);
 
-        // 🚫 Rendre la voiture indisponible
+        //  Rendre la voiture indisponible
         $car->update(['disponibilite' => false]);
 
         $reservation->load(['car' => function($query) {
@@ -79,6 +79,7 @@ class ReservationController extends Controller
 
     public function confirm($id)
     {
+        //procedure confirmReservation
         DB::statement('CALL ConfirmReservation(?)', [$id]);
     
         return redirect()->route('reservations.show', $id)->with('success', 'Réservation confirmée.');
@@ -87,15 +88,11 @@ class ReservationController extends Controller
     {
         $reservation->update(['status' => 'cancelled']);
 
-        // ✅ Rendre la voiture de nouveau disponible
+        //  Rendre la voiture de nouveau disponible
         $reservation->car->update(['disponibilite' => true]);
 
         return redirect()->back()->with('success', 'Réservation annulée.');
     }
 
-    public function downloadPdf(Reservation $reservation)
-    {
-        $pdf = Pdf::loadView('pdf.reservation', ['reservation' => $reservation->load('car', 'user')]);
-        return $pdf->download('reservation_' . $reservation->id . '.pdf');
-    }
+   
 }
